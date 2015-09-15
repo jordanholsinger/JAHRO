@@ -1,4 +1,6 @@
 # JAHRO
 Frugè Holsinger Working Paper
 
-Data under HRO_data is the HRO Naming and Shaming data. As you can there are no judiciary call outs... 
+This repository contains the code for an early working paper on HRO Activities, Judiciaries, and Human Rights Changes. 
+
+Abstract: 
