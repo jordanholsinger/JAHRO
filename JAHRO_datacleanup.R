@@ -8,7 +8,7 @@ library(foreign)
 library(tidyr)
 library(doBy)
 
-Events95 <- read.csv2("/Users/KimFruge/Desktop/Projects/Events1995.tab",  sep="\t", header=TRUE)
+Events95 <- read.csv2("/Volumes/Lexar/Events1995.tab",  sep="\t", header=TRUE)
 
 data95a<-separate(Events95, "Target.Sectors", paste("Target.Sectors", 1:17, sep="_"), sep=",", extra="drop")
 
@@ -55,47 +55,82 @@ data95c<-subset(data95b,
                 (data95b$Source.Sectors_16=="Human Rights IGOs" | data95b$Source.Sectors_16=="Global Human Rights IGOs" | data95b$Source.Sectors_16=="Regional Human Rights IGOs") | 
                 (data95b$Source.Sectors_17=="Human Rights IGOs" | data95b$Source.Sectors_17=="Global Human Rights IGOs" | data95b$Source.Sectors_17=="Regional Human Rights IGOs") 
         )
-
 data95d<-data95c
-data95d$Appeal_Jud_Coop<-ifelse(data95d$CAMEO.Code=="213", 1, NA)
-data95d$Appeal_Change_Leadership<-ifelse(data95d$CAMEO.Code=="241", 1, NA)
-data95d$Appeal_Policy_Change<-ifelse(data95d$CAMEO.Code=="242", 1, NA)
-data95d$Appeal_Rights<-ifelse(data95d$CAMEO.Code=="243", 1, NA)
-data95d$Appeal_Change_Inst<-ifelse(data95d$CAMEO.Code=="244", 1, NA)
-data95d$Appeal_Release<-ifelse(data95d$CAMEO.Code=="253", 1, NA)
-data95d$Demand<-ifelse(data95d$CAMEO.Code=="100", 1, NA)
-data95d$Demand_Change_Leadership<-ifelse(data95d$CAMEO.Code=="1041", 1, NA) 
-data95d$Demand_Policy_Change<-ifelse(data95d$CAMEO.Code=="1042", 1, NA)
-data95d$Demand_Rights<-ifelse(data95d$CAMEO.Code=="1043", 1, NA)
-data95d$Demand_Change_Inst<-ifelse(data95d$CAMEO.Code=="1044", 1, NA)
-data95d$Accuse_HR<-ifelse(data95d$CAMEO.Code=="1122", 1, NA)
-data95d$Accuse<-ifelse(data95d$CAMEO.Code=="112", 1, NA)
-data95d$Criticize<-ifelse(data95d$CAMEO.Code=="111", 1, NA)
-data95d$Investigate_War_Crimes<-ifelse(data95d$CAMEO.Code=="94", 1, NA)
-data95d$Investigate_HR<-ifelse(data95d$CAMEO.Code=="92", 1, NA)
-data95d$Demand_Jud_Coop<-ifelse(data95d$CAMEO.Code=="1013", 1, NA)
-data95d$Demand_Hum_Aid<-ifelse(data95d$CAMEO.Code=="1033", 1, NA)
-data95d$Demand_Release<-ifelse(data95d$CAMEO.Code=="1053", 1, NA)
-data95d$Accuse_War_Crimes<-ifelse(data95d$CAMEO.Code=="1124", 1, NA)
+data95d$CC10<-ifelse(data95d$CAMEO.Code=="10", 1, 0)
+data95d$CC12<-ifelse(data95d$CAMEO.Code=="12", 1, 0)
+data95d$CC20<-ifelse(data95d$CAMEO.Code=="20", 1, 0)
+data95d$CC22<-ifelse(data95d$CAMEO.Code=="22", 1, 0)
+data95d$CC23<-ifelse(data95d$CAMEO.Code=="23", 1, 0)
+data95d$CC24<-ifelse(data95d$CAMEO.Code=="24", 1, 0)
+data95d$CC25<-ifelse(data95d$CAMEO.Code=="25", 1, 0)
+data95d$CC90<-ifelse(data95d$CAMEO.Code=="90", 1, 0)
+data95d$CC91<-ifelse(data95d$CAMEO.Code=="91", 1, 0)
+data95d$CC92<-ifelse(data95d$CAMEO.Code=="92", 1, 0)
+data95d$CC94<-ifelse(data95d$CAMEO.Code=="94", 1, 0)
+data95d$CC100<-ifelse(data95d$CAMEO.Code=="100", 1, 0)
+data95d$CC101<-ifelse(data95d$CAMEO.Code=="101", 1, 0)
+data95d$CC102<-ifelse(data95d$CAMEO.Code=="102", 1, 0)
+data95d$CC103<-ifelse(data95d$CAMEO.Code=="103", 1, 0)
+data95d$CC104<-ifelse(data95d$CAMEO.Code=="104", 1, 0)
+data95d$CC106<-ifelse(data95d$CAMEO.Code=="106", 1, 0)
+data95d$CC108<-ifelse(data95d$CAMEO.Code=="108", 1, 0)
+data95d$CC111<-ifelse(data95d$CAMEO.Code=="111", 1, 0)
+data95d$CC112<-ifelse(data95d$CAMEO.Code=="112", 1, 0)
+data95d$CC113<-ifelse(data95d$CAMEO.Code=="113", 1, 0)
+data95d$CC114<-ifelse(data95d$CAMEO.Code=="114", 1, 0)
+data95d$CC124<-ifelse(data95d$CAMEO.Code=="124", 1, 0)
+data95d$CC130<-ifelse(data95d$CAMEO.Code=="130", 1, 0)
+data95d$CC131<-ifelse(data95d$CAMEO.Code=="131", 1, 0)
+data95d$CC133<-ifelse(data95d$CAMEO.Code=="133", 1, 0)
+data95d$CC138<-ifelse(data95d$CAMEO.Code=="138", 1, 0)
+data95d$CC139<-ifelse(data95d$CAMEO.Code=="139", 1, 0)
+data95d$CC163<-ifelse(data95d$CAMEO.Code=="163", 1, 0)
+data95d$CC213<-ifelse(data95d$CAMEO.Code=="213", 1, 0)
+data95d$CC214<-ifelse(data95d$CAMEO.Code=="214", 1, 0)
+data95d$CC241<-ifelse(data95d$CAMEO.Code=="241", 1, 0)
+data95d$CC242<-ifelse(data95d$CAMEO.Code=="242", 1, 0)
+data95d$CC243<-ifelse(data95d$CAMEO.Code=="243", 1, 0)
+data95d$CC244<-ifelse(data95d$CAMEO.Code=="244", 1, 0)
+data95d$CC253<-ifelse(data95d$CAMEO.Code=="253", 1, 0)
+data95d$CC255<-ifelse(data95d$CAMEO.Code=="255", 1, 0)
+data95d$CC256<-ifelse(data95d$CAMEO.Code=="256", 1, 0)
+data95d$CC1041<-ifelse(data95d$CAMEO.Code=="1041", 1, 0)
+data95d$CC1042<-ifelse(data95d$CAMEO.Code=="1042", 1, 0)
+data95d$CC1043<-ifelse(data95d$CAMEO.Code=="1043", 1, 0)
+data95d$CC1053<-ifelse(data95d$CAMEO.Code=="1053", 1, 0)
+data95d$CC1056<-ifelse(data95d$CAMEO.Code=="1056", 1, 0)
+data95d$CC1121<-ifelse(data95d$CAMEO.Code=="1121", 1, 0)
+data95d$CC1122<-ifelse(data95d$CAMEO.Code=="1122", 1, 0)
+data95d$CC1123<-ifelse(data95d$CAMEO.Code=="1123", 1, 0)
+data95d$CC1124<-ifelse(data95d$CAMEO.Code=="1124", 1, 0)
+data95d$CC1125<-ifelse(data95d$CAMEO.Code=="1125", 1, 0)
+data95d$CC1242<-ifelse(data95d$CAMEO.Code=="1242", 1, 0)
+data95d$CC93 <- ifelse(data95d$CAMEO.Code=="93", 1, 0)
+data95d$CC1014 <- ifelse(data95d$CAMEO.Code=="1014", 1, 0)
 
 
 
 data95e<-separate(data95d, "Event.Date", paste("Date", 1:3, sep="_"), sep="-", extra="drop")
 
-event.counts1995<-summaryBy(Appeal_Jud_Coop + Appeal_Change_Leadership + Appeal_Policy_Change + 
-                        Appeal_Rights + Appeal_Change_Inst + Demand + Demand_Change_Leadership
-                        + Demand_Policy_Change + Demand_Rights + Demand_Change_Inst + Appeal_Release
-                        + Accuse_HR + Accuse + Criticize + Investigate_War_Crimes + Investigate_HR + Demand_Jud_Coop + Demand_Hum_Aid 
-                        + Demand_Release + Accuse_War_Crimes ~ Country + Date_1, 
+event.count1995<-summaryBy(CC10+ CC12 + CC20 + CC22 + CC23 + CC24 + CC25 
+                           + CC90 + CC91+ CC92+ CC93+ CC94 + CC100 + 
+                                   CC101 + CC102 + CC103 + CC104 + CC106 + 
+                                   CC108+ CC111 +CC112 + CC113 + CC114 + CC124 
+                           + CC130 + CC131 + CC133 + CC138 + CC139 + 
+                                   CC163 + CC213 + CC214 + CC241 + CC242 + 
+                                   CC243 + CC244 + CC253 + CC255 + CC256 + 
+                                   CC1014 + CC1041 + CC1042 + CC1043 + CC1053 + 
+                                   CC1056 + CC1121 + CC1122 + CC1123 + CC1124 + 
+                                   CC1125 + CC1242  ~ Country + Date_1, 
                         FUN=sum, data=data95e)
 
 
 
-write.csv(event.counts1995, "/Users/KimFruge/Desktop/Projects/JAHRO/event.counts1995.cvs") 
+write.csv(event.count1995, "/Volumes/Lexar/event.counts1995.csv") 
 
 #________________________
 
-Events96 <- read.csv2("/Users/KimFruge/Desktop/Projects/Events1996.tab",  sep="\t", header=TRUE)
+Events96 <- read.csv2("/Volumes/Lexar/Events1996.tab",  sep="\t", header=TRUE)
 
 data96a<-separate(Events96, "Target.Sectors", paste("Target.Sectors", 1:17, sep="_"), sep=",", extra="drop")
 
@@ -144,45 +179,80 @@ data96c<-subset(data96b,
 )
 
 data96d<-data96c
-data96d$Appeal_Jud_Coop<-ifelse(data96d$CAMEO.Code=="213", 1, NA)
-data96d$Appeal_Change_Leadership<-ifelse(data96d$CAMEO.Code=="241", 1, NA)
-data96d$Appeal_Policy_Change<-ifelse(data96d$CAMEO.Code=="242", 1, NA)
-data96d$Appeal_Rights<-ifelse(data96d$CAMEO.Code=="243", 1, NA)
-data96d$Appeal_Change_Inst<-ifelse(data96d$CAMEO.Code=="244", 1, NA)
-data96d$Appeal_Release<-ifelse(data96d$CAMEO.Code=="253", 1, NA)
-data96d$Demand<-ifelse(data96d$CAMEO.Code=="100", 1, NA)
-data96d$Demand_Change_Leadership<-ifelse(data96d$CAMEO.Code=="1041", 1, NA) 
-data96d$Demand_Policy_Change<-ifelse(data96d$CAMEO.Code=="1042", 1, NA)
-data96d$Demand_Rights<-ifelse(data96d$CAMEO.Code=="1043", 1, NA)
-data96d$Demand_Change_Inst<-ifelse(data96d$CAMEO.Code=="1044", 1, NA)
-data96d$Accuse_HR<-ifelse(data96d$CAMEO.Code=="1122", 1, NA)
-data96d$Accuse<-ifelse(data96d$CAMEO.Code=="112", 1, NA)
-data96d$Criticize<-ifelse(data96d$CAMEO.Code=="111", 1, NA)
-data96d$Investigate_War_Crimes<-ifelse(data96d$CAMEO.Code=="94", 1, NA)
-data96d$Investigate_HR<-ifelse(data96d$CAMEO.Code=="92", 1, NA)
-data96d$Demand_Jud_Coop<-ifelse(data96d$CAMEO.Code=="1013", 1, NA)
-data96d$Demand_Hum_Aid<-ifelse(data96d$CAMEO.Code=="1033", 1, NA)
-data96d$Demand_Release<-ifelse(data96d$CAMEO.Code=="1053", 1, NA)
-data96d$Accuse_War_Crimes<-ifelse(data96d$CAMEO.Code=="1124", 1, NA)
-
+data96d$CC10<-ifelse(data96d$CAMEO.Code=="10", 1, 0)
+data96d$CC12<-ifelse(data96d$CAMEO.Code=="12", 1, 0)
+data96d$CC20<-ifelse(data96d$CAMEO.Code=="20", 1, 0)
+data96d$CC22<-ifelse(data96d$CAMEO.Code=="22", 1, 0)
+data96d$CC23<-ifelse(data96d$CAMEO.Code=="23", 1, 0)
+data96d$CC24<-ifelse(data96d$CAMEO.Code=="24", 1, 0)
+data96d$CC25<-ifelse(data96d$CAMEO.Code=="25", 1, 0)
+data96d$CC90<-ifelse(data96d$CAMEO.Code=="90", 1, 0)
+data96d$CC91<-ifelse(data96d$CAMEO.Code=="91", 1, 0)
+data96d$CC92<-ifelse(data96d$CAMEO.Code=="92", 1, 0)
+data96d$CC94<-ifelse(data96d$CAMEO.Code=="94", 1, 0)
+data96d$CC100<-ifelse(data96d$CAMEO.Code=="100", 1, 0)
+data96d$CC101<-ifelse(data96d$CAMEO.Code=="101", 1, 0)
+data96d$CC102<-ifelse(data96d$CAMEO.Code=="102", 1, 0)
+data96d$CC103<-ifelse(data96d$CAMEO.Code=="103", 1, 0)
+data96d$CC104<-ifelse(data96d$CAMEO.Code=="104", 1, 0)
+data96d$CC106<-ifelse(data96d$CAMEO.Code=="106", 1, 0)
+data96d$CC108<-ifelse(data96d$CAMEO.Code=="108", 1, 0)
+data96d$CC111<-ifelse(data96d$CAMEO.Code=="111", 1, 0)
+data96d$CC112<-ifelse(data96d$CAMEO.Code=="112", 1, 0)
+data96d$CC113<-ifelse(data96d$CAMEO.Code=="113", 1, 0)
+data96d$CC114<-ifelse(data96d$CAMEO.Code=="114", 1, 0)
+data96d$CC124<-ifelse(data96d$CAMEO.Code=="124", 1, 0)
+data96d$CC130<-ifelse(data96d$CAMEO.Code=="130", 1, 0)
+data96d$CC131<-ifelse(data96d$CAMEO.Code=="131", 1, 0)
+data96d$CC133<-ifelse(data96d$CAMEO.Code=="133", 1, 0)
+data96d$CC138<-ifelse(data96d$CAMEO.Code=="138", 1, 0)
+data96d$CC139<-ifelse(data96d$CAMEO.Code=="139", 1, 0)
+data96d$CC163<-ifelse(data96d$CAMEO.Code=="163", 1, 0)
+data96d$CC213<-ifelse(data96d$CAMEO.Code=="213", 1, 0)
+data96d$CC214<-ifelse(data96d$CAMEO.Code=="214", 1, 0)
+data96d$CC241<-ifelse(data96d$CAMEO.Code=="241", 1, 0)
+data96d$CC242<-ifelse(data96d$CAMEO.Code=="242", 1, 0)
+data96d$CC243<-ifelse(data96d$CAMEO.Code=="243", 1, 0)
+data96d$CC244<-ifelse(data96d$CAMEO.Code=="244", 1, 0)
+data96d$CC253<-ifelse(data96d$CAMEO.Code=="253", 1, 0)
+data96d$CC255<-ifelse(data96d$CAMEO.Code=="255", 1, 0)
+data96d$CC256<-ifelse(data96d$CAMEO.Code=="256", 1, 0)
+data96d$CC1041<-ifelse(data96d$CAMEO.Code=="1041", 1, 0)
+data96d$CC1042<-ifelse(data96d$CAMEO.Code=="1042", 1, 0)
+data96d$CC1043<-ifelse(data96d$CAMEO.Code=="1043", 1, 0)
+data96d$CC1053<-ifelse(data96d$CAMEO.Code=="1053", 1, 0)
+data96d$CC1056<-ifelse(data96d$CAMEO.Code=="1056", 1, 0)
+data96d$CC1121<-ifelse(data96d$CAMEO.Code=="1121", 1, 0)
+data96d$CC1122<-ifelse(data96d$CAMEO.Code=="1122", 1, 0)
+data96d$CC1123<-ifelse(data96d$CAMEO.Code=="1123", 1, 0)
+data96d$CC1124<-ifelse(data96d$CAMEO.Code=="1124", 1, 0)
+data96d$CC1125<-ifelse(data96d$CAMEO.Code=="1125", 1, 0)
+data96d$CC1242<-ifelse(data96d$CAMEO.Code=="1242", 1, 0)
+data96d$CC93 <- ifelse(data96d$CAMEO.Code=="93", 1, 0)
+data96d$CC1014 <- ifelse(data96d$CAMEO.Code=="1014", 1, 0)
 
 
 data96e<-separate(data96d, "Event.Date", paste("Date", 1:3, sep="_"), sep="-", extra="drop")
 
-event.counts1996<-summaryBy(Appeal_Jud_Coop + Appeal_Change_Leadership + Appeal_Policy_Change + 
-                                   Appeal_Rights + Appeal_Change_Inst + Demand + Demand_Change_Leadership
-                           + Demand_Policy_Change + Demand_Rights + Demand_Change_Inst + Appeal_Release
-                           + Accuse_HR + Accuse + Criticize + Investigate_War_Crimes + Investigate_HR + Demand_Jud_Coop + Demand_Hum_Aid 
-                           + Demand_Release + Accuse_War_Crimes ~ Country + Date_1, 
+event.count1996<-summaryBy(CC10+ CC12 + CC20 + CC22 + CC23 + CC24 + CC25 
+                           + CC90 + CC91+ CC92+ CC93+ CC94 + CC100 + 
+                                   CC101 + CC102 + CC103 + CC104 + CC106 + 
+                                   CC108+ CC111 +CC112 + CC113 + CC114 + CC124 
+                           + CC130 + CC131 + CC133 + CC138 + CC139 + 
+                                   CC163 + CC213 + CC214 + CC241 + CC242 + 
+                                   CC243 + CC244 + CC253 + CC255 + CC256 + 
+                                   CC1014 + CC1041 + CC1042 + CC1043 + CC1053 + 
+                                   CC1056 + CC1121 + CC1122 + CC1123 + CC1124 + 
+                                   CC1125 + CC1242  ~ Country + Date_1, 
                            FUN=sum, data=data96e)
 
 
 
-write.csv(event.counts1996, "/Users/KimFruge/Desktop/Projects/JAHRO/event.counts1996.cvs") 
+write.csv(event.count1996, "/Volumes/Lexar/event.counts1996.csv") 
 
 #____________________________
 
-Events97 <- read.csv2("/Users/KimFruge/Desktop/Projects/Events1997.tab",  sep="\t", header=TRUE)
+Events97 <- read.csv2("/Volumes/Lexar/Events1997.tab",  sep="\t", header=TRUE)
 
 data97a<-separate(Events97, "Target.Sectors", paste("Target.Sectors", 1:17, sep="_"), sep=",", extra="drop")
 
@@ -231,46 +301,82 @@ data97c<-subset(data97b,
 )
 
 data97d<-data97c
-data97d$Appeal_Jud_Coop<-ifelse(data97d$CAMEO.Code=="213", 1, NA)
-data97d$Appeal_Change_Leadership<-ifelse(data97d$CAMEO.Code=="241", 1, NA)
-data97d$Appeal_Policy_Change<-ifelse(data97d$CAMEO.Code=="242", 1, NA)
-data97d$Appeal_Rights<-ifelse(data97d$CAMEO.Code=="243", 1, NA)
-data97d$Appeal_Change_Inst<-ifelse(data97d$CAMEO.Code=="244", 1, NA)
-data97d$Appeal_Release<-ifelse(data97d$CAMEO.Code=="253", 1, NA)
-data97d$Demand<-ifelse(data97d$CAMEO.Code=="100", 1, NA)
-data97d$Demand_Change_Leadership<-ifelse(data97d$CAMEO.Code=="1041", 1, NA) 
-data97d$Demand_Policy_Change<-ifelse(data97d$CAMEO.Code=="1042", 1, NA)
-data97d$Demand_Rights<-ifelse(data97d$CAMEO.Code=="1043", 1, NA)
-data97d$Demand_Change_Inst<-ifelse(data97d$CAMEO.Code=="1044", 1, NA)
-data97d$Accuse_HR<-ifelse(data97d$CAMEO.Code=="1122", 1, NA)
-data97d$Accuse<-ifelse(data97d$CAMEO.Code=="112", 1, NA)
-data97d$Criticize<-ifelse(data97d$CAMEO.Code=="111", 1, NA)
-data97d$Investigate_War_Crimes<-ifelse(data97d$CAMEO.Code=="94", 1, NA)
-data97d$Investigate_HR<-ifelse(data97d$CAMEO.Code=="92", 1, NA)
-data97d$Demand_Jud_Coop<-ifelse(data97d$CAMEO.Code=="1013", 1, NA)
-data97d$Demand_Hum_Aid<-ifelse(data97d$CAMEO.Code=="1033", 1, NA)
-data97d$Demand_Release<-ifelse(data97d$CAMEO.Code=="1053", 1, NA)
-data97d$Accuse_War_Crimes<-ifelse(data97d$CAMEO.Code=="1124", 1, NA)
+data97d$CC10<-ifelse(data97d$CAMEO.Code=="10", 1, 0)
+data97d$CC12<-ifelse(data97d$CAMEO.Code=="12", 1, 0)
+data97d$CC20<-ifelse(data97d$CAMEO.Code=="20", 1, 0)
+data97d$CC22<-ifelse(data97d$CAMEO.Code=="22", 1, 0)
+data97d$CC23<-ifelse(data97d$CAMEO.Code=="23", 1, 0)
+data97d$CC24<-ifelse(data97d$CAMEO.Code=="24", 1, 0)
+data97d$CC25<-ifelse(data97d$CAMEO.Code=="25", 1, 0)
+data97d$CC90<-ifelse(data97d$CAMEO.Code=="90", 1, 0)
+data97d$CC91<-ifelse(data97d$CAMEO.Code=="91", 1, 0)
+data97d$CC92<-ifelse(data97d$CAMEO.Code=="92", 1, 0)
+data97d$CC94<-ifelse(data97d$CAMEO.Code=="94", 1, 0)
+data97d$CC100<-ifelse(data97d$CAMEO.Code=="100", 1, 0)
+data97d$CC101<-ifelse(data97d$CAMEO.Code=="101", 1, 0)
+data97d$CC102<-ifelse(data97d$CAMEO.Code=="102", 1, 0)
+data97d$CC103<-ifelse(data97d$CAMEO.Code=="103", 1, 0)
+data97d$CC104<-ifelse(data97d$CAMEO.Code=="104", 1, 0)
+data97d$CC106<-ifelse(data97d$CAMEO.Code=="106", 1, 0)
+data97d$CC108<-ifelse(data97d$CAMEO.Code=="108", 1, 0)
+data97d$CC111<-ifelse(data97d$CAMEO.Code=="111", 1, 0)
+data97d$CC112<-ifelse(data97d$CAMEO.Code=="112", 1, 0)
+data97d$CC113<-ifelse(data97d$CAMEO.Code=="113", 1, 0)
+data97d$CC114<-ifelse(data97d$CAMEO.Code=="114", 1, 0)
+data97d$CC124<-ifelse(data97d$CAMEO.Code=="124", 1, 0)
+data97d$CC130<-ifelse(data97d$CAMEO.Code=="130", 1, 0)
+data97d$CC131<-ifelse(data97d$CAMEO.Code=="131", 1, 0)
+data97d$CC133<-ifelse(data97d$CAMEO.Code=="133", 1, 0)
+data97d$CC138<-ifelse(data97d$CAMEO.Code=="138", 1, 0)
+data97d$CC139<-ifelse(data97d$CAMEO.Code=="139", 1, 0)
+data97d$CC163<-ifelse(data97d$CAMEO.Code=="163", 1, 0)
+data97d$CC213<-ifelse(data97d$CAMEO.Code=="213", 1, 0)
+data97d$CC214<-ifelse(data97d$CAMEO.Code=="214", 1, 0)
+data97d$CC241<-ifelse(data97d$CAMEO.Code=="241", 1, 0)
+data97d$CC242<-ifelse(data97d$CAMEO.Code=="242", 1, 0)
+data97d$CC243<-ifelse(data97d$CAMEO.Code=="243", 1, 0)
+data97d$CC244<-ifelse(data97d$CAMEO.Code=="244", 1, 0)
+data97d$CC253<-ifelse(data97d$CAMEO.Code=="253", 1, 0)
+data97d$CC255<-ifelse(data97d$CAMEO.Code=="255", 1, 0)
+data97d$CC256<-ifelse(data97d$CAMEO.Code=="256", 1, 0)
+data97d$CC1041<-ifelse(data97d$CAMEO.Code=="1041", 1, 0)
+data97d$CC1042<-ifelse(data97d$CAMEO.Code=="1042", 1, 0)
+data97d$CC1043<-ifelse(data97d$CAMEO.Code=="1043", 1, 0)
+data97d$CC1053<-ifelse(data97d$CAMEO.Code=="1053", 1, 0)
+data97d$CC1056<-ifelse(data97d$CAMEO.Code=="1056", 1, 0)
+data97d$CC1121<-ifelse(data97d$CAMEO.Code=="1121", 1, 0)
+data97d$CC1122<-ifelse(data97d$CAMEO.Code=="1122", 1, 0)
+data97d$CC1123<-ifelse(data97d$CAMEO.Code=="1123", 1, 0)
+data97d$CC1124<-ifelse(data97d$CAMEO.Code=="1124", 1, 0)
+data97d$CC1125<-ifelse(data97d$CAMEO.Code=="1125", 1, 0)
+data97d$CC1242<-ifelse(data97d$CAMEO.Code=="1242", 1, 0)
+data97d$CC93 <- ifelse(data97d$CAMEO.Code=="93", 1, 0)
+data97d$CC1014 <- ifelse(data97d$CAMEO.Code=="1014", 1, 0)
 
 
 
 data97e<-separate(data97d, "Event.Date", paste("Date", 1:3, sep="_"), sep="-", extra="drop")
 
-event.counts1997<-summaryBy(Appeal_Jud_Coop + Appeal_Change_Leadership + Appeal_Policy_Change + 
-                                   Appeal_Rights + Appeal_Change_Inst + Demand + Demand_Change_Leadership
-                           + Demand_Policy_Change + Demand_Rights + Demand_Change_Inst + Appeal_Release
-                           + Accuse_HR + Accuse + Criticize + Investigate_War_Crimes + Investigate_HR + Demand_Jud_Coop + Demand_Hum_Aid 
-                           + Demand_Release + Accuse_War_Crimes ~ Country + Date_1, 
+event.count1997<-summaryBy(CC10+ CC12 + CC20 + CC22 + CC23 + CC24 + CC25 
+                           + CC90 + CC91+ CC92+ CC93+ CC94 + CC100 + 
+                                   CC101 + CC102 + CC103 + CC104 + CC106 + 
+                                   CC108+ CC111 +CC112 + CC113 + CC114 + CC124 
+                           + CC130 + CC131 + CC133 + CC138 + CC139 + 
+                                   CC163 + CC213 + CC214 + CC241 + CC242 + 
+                                   CC243 + CC244 + CC253 + CC255 + CC256 + 
+                                   CC1014 + CC1041 + CC1042 + CC1043 + CC1053 + 
+                                   CC1056 + CC1121 + CC1122 + CC1123 + CC1124 + 
+                                   CC1125 + CC1242  ~ Country + Date_1, 
                            FUN=sum, data=data97e)
 
 
 
-write.csv(event.counts1997, "/Users/KimFruge/Desktop/Projects/JAHRO/event.counts1997.cvs") 
+write.csv(event.count1997, "/Volumes/Lexar/event.counts1997.csv") 
 
 
 #____________________________
 
-Events98 <- read.csv2("/Users/KimFruge/Desktop/Projects/Events1998.tab",  sep="\t", header=TRUE)
+Events98 <- read.csv2("/Volumes/Lexar/Events1998.tab",  sep="\t", header=TRUE)
 
 data98a<-separate(Events98, "Target.Sectors", paste("Target.Sectors", 1:17, sep="_"), sep=",", extra="drop")
 
@@ -319,47 +425,83 @@ data98c<-subset(data98b,
 )
 
 data98d<-data98c
-data98d$Appeal_Jud_Coop<-ifelse(data98d$CAMEO.Code=="213", 1, NA)
-data98d$Appeal_Change_Leadership<-ifelse(data98d$CAMEO.Code=="241", 1, NA)
-data98d$Appeal_Policy_Change<-ifelse(data98d$CAMEO.Code=="242", 1, NA)
-data98d$Appeal_Rights<-ifelse(data98d$CAMEO.Code=="243", 1, NA)
-data98d$Appeal_Change_Inst<-ifelse(data98d$CAMEO.Code=="244", 1, NA)
-data98d$Appeal_Release<-ifelse(data98d$CAMEO.Code=="253", 1, NA)
-data98d$Demand<-ifelse(data98d$CAMEO.Code=="100", 1, NA)
-data98d$Demand_Change_Leadership<-ifelse(data98d$CAMEO.Code=="1041", 1, NA) 
-data98d$Demand_Policy_Change<-ifelse(data98d$CAMEO.Code=="1042", 1, NA)
-data98d$Demand_Rights<-ifelse(data98d$CAMEO.Code=="1043", 1, NA)
-data98d$Demand_Change_Inst<-ifelse(data98d$CAMEO.Code=="1044", 1, NA)
-data98d$Accuse_HR<-ifelse(data98d$CAMEO.Code=="1122", 1, NA)
-data98d$Accuse<-ifelse(data98d$CAMEO.Code=="112", 1, NA)
-data98d$Criticize<-ifelse(data98d$CAMEO.Code=="111", 1, NA)
-data98d$Investigate_War_Crimes<-ifelse(data98d$CAMEO.Code=="94", 1, NA)
-data98d$Investigate_HR<-ifelse(data98d$CAMEO.Code=="92", 1, NA)
-data98d$Demand_Jud_Coop<-ifelse(data98d$CAMEO.Code=="1013", 1, NA)
-data98d$Demand_Hum_Aid<-ifelse(data98d$CAMEO.Code=="1033", 1, NA)
-data98d$Demand_Release<-ifelse(data98d$CAMEO.Code=="1053", 1, NA)
-data98d$Accuse_War_Crimes<-ifelse(data98d$CAMEO.Code=="1124", 1, NA)
+data98d$CC10<-ifelse(data98d$CAMEO.Code=="10", 1, 0)
+data98d$CC12<-ifelse(data98d$CAMEO.Code=="12", 1, 0)
+data98d$CC20<-ifelse(data98d$CAMEO.Code=="20", 1, 0)
+data98d$CC22<-ifelse(data98d$CAMEO.Code=="22", 1, 0)
+data98d$CC23<-ifelse(data98d$CAMEO.Code=="23", 1, 0)
+data98d$CC24<-ifelse(data98d$CAMEO.Code=="24", 1, 0)
+data98d$CC25<-ifelse(data98d$CAMEO.Code=="25", 1, 0)
+data98d$CC90<-ifelse(data98d$CAMEO.Code=="90", 1, 0)
+data98d$CC91<-ifelse(data98d$CAMEO.Code=="91", 1, 0)
+data98d$CC92<-ifelse(data98d$CAMEO.Code=="92", 1, 0)
+data98d$CC94<-ifelse(data98d$CAMEO.Code=="94", 1, 0)
+data98d$CC100<-ifelse(data98d$CAMEO.Code=="100", 1, 0)
+data98d$CC101<-ifelse(data98d$CAMEO.Code=="101", 1, 0)
+data98d$CC102<-ifelse(data98d$CAMEO.Code=="102", 1, 0)
+data98d$CC103<-ifelse(data98d$CAMEO.Code=="103", 1, 0)
+data98d$CC104<-ifelse(data98d$CAMEO.Code=="104", 1, 0)
+data98d$CC106<-ifelse(data98d$CAMEO.Code=="106", 1, 0)
+data98d$CC108<-ifelse(data98d$CAMEO.Code=="108", 1, 0)
+data98d$CC111<-ifelse(data98d$CAMEO.Code=="111", 1, 0)
+data98d$CC112<-ifelse(data98d$CAMEO.Code=="112", 1, 0)
+data98d$CC113<-ifelse(data98d$CAMEO.Code=="113", 1, 0)
+data98d$CC114<-ifelse(data98d$CAMEO.Code=="114", 1, 0)
+data98d$CC124<-ifelse(data98d$CAMEO.Code=="124", 1, 0)
+data98d$CC130<-ifelse(data98d$CAMEO.Code=="130", 1, 0)
+data98d$CC131<-ifelse(data98d$CAMEO.Code=="131", 1, 0)
+data98d$CC133<-ifelse(data98d$CAMEO.Code=="133", 1, 0)
+data98d$CC138<-ifelse(data98d$CAMEO.Code=="138", 1, 0)
+data98d$CC139<-ifelse(data98d$CAMEO.Code=="139", 1, 0)
+data98d$CC163<-ifelse(data98d$CAMEO.Code=="163", 1, 0)
+data98d$CC213<-ifelse(data98d$CAMEO.Code=="213", 1, 0)
+data98d$CC214<-ifelse(data98d$CAMEO.Code=="214", 1, 0)
+data98d$CC241<-ifelse(data98d$CAMEO.Code=="241", 1, 0)
+data98d$CC242<-ifelse(data98d$CAMEO.Code=="242", 1, 0)
+data98d$CC243<-ifelse(data98d$CAMEO.Code=="243", 1, 0)
+data98d$CC244<-ifelse(data98d$CAMEO.Code=="244", 1, 0)
+data98d$CC253<-ifelse(data98d$CAMEO.Code=="253", 1, 0)
+data98d$CC255<-ifelse(data98d$CAMEO.Code=="255", 1, 0)
+data98d$CC256<-ifelse(data98d$CAMEO.Code=="256", 1, 0)
+data98d$CC1041<-ifelse(data98d$CAMEO.Code=="1041", 1, 0)
+data98d$CC1042<-ifelse(data98d$CAMEO.Code=="1042", 1, 0)
+data98d$CC1043<-ifelse(data98d$CAMEO.Code=="1043", 1, 0)
+data98d$CC1053<-ifelse(data98d$CAMEO.Code=="1053", 1, 0)
+data98d$CC1056<-ifelse(data98d$CAMEO.Code=="1056", 1, 0)
+data98d$CC1121<-ifelse(data98d$CAMEO.Code=="1121", 1, 0)
+data98d$CC1122<-ifelse(data98d$CAMEO.Code=="1122", 1, 0)
+data98d$CC1123<-ifelse(data98d$CAMEO.Code=="1123", 1, 0)
+data98d$CC1124<-ifelse(data98d$CAMEO.Code=="1124", 1, 0)
+data98d$CC1125<-ifelse(data98d$CAMEO.Code=="1125", 1, 0)
+data98d$CC1242<-ifelse(data98d$CAMEO.Code=="1242", 1, 0)
+data98d$CC93 <- ifelse(data98d$CAMEO.Code=="93", 1, 0)
+data98d$CC1014 <- ifelse(data98d$CAMEO.Code=="1014", 1, 0)
 
 
 
 data98e<-separate(data98d, "Event.Date", paste("Date", 1:3, sep="_"), sep="-", extra="drop")
 
-event.counts1998<-summaryBy(Appeal_Jud_Coop + Appeal_Change_Leadership + Appeal_Policy_Change + 
-                                   Appeal_Rights + Appeal_Change_Inst + Demand + Demand_Change_Leadership
-                           + Demand_Policy_Change + Demand_Rights + Demand_Change_Inst + Appeal_Release
-                           + Accuse_HR + Accuse + Criticize + Investigate_War_Crimes + Investigate_HR + Demand_Jud_Coop + Demand_Hum_Aid 
-                           + Demand_Release + Accuse_War_Crimes ~ Country + Date_1, 
+event.count1998<-summaryBy(CC10+ CC12 + CC20 + CC22 + CC23 + CC24 + CC25 
+                           + CC90 + CC91+ CC92+ CC93+ CC94 + CC100 + 
+                                   CC101 + CC102 + CC103 + CC104 + CC106 + 
+                                   CC108+ CC111 +CC112 + CC113 + CC114 + CC124 
+                           + CC130 + CC131 + CC133 + CC138 + CC139 + 
+                                   CC163 + CC213 + CC214 + CC241 + CC242 + 
+                                   CC243 + CC244 + CC253 + CC255 + CC256 + 
+                                   CC1014 + CC1041 + CC1042 + CC1043 + CC1053 + 
+                                   CC1056 + CC1121 + CC1122 + CC1123 + CC1124 + 
+                                   CC1125 + CC1242  ~ Country + Date_1, 
                            FUN=sum, data=data98e)
 
 
 
-write.csv(event.counts1998, "/Users/KimFruge/Desktop/Projects/JAHRO/event.counts1998.cvs") 
+write.csv(event.count1998, "/Volumes/Lexar/event.counts1998.csv") 
 
 
 
 #____________________________
 
-Events99 <- read.csv2("/Users/KimFruge/Desktop/Projects/Events1999.tab",  sep="\t", header=TRUE)
+Events99 <- read.csv2("/Volumes/Lexar/Events1999.tab",  sep="\t", header=TRUE)
 
 data99a<-separate(Events99, "Target.Sectors", paste("Target.Sectors", 1:17, sep="_"), sep=",", extra="drop")
 
@@ -408,47 +550,83 @@ data99c<-subset(data99b,
 )
 
 data99d<-data99c
-data99d$Appeal_Jud_Coop<-ifelse(data99d$CAMEO.Code=="213", 1, NA)
-data99d$Appeal_Change_Leadership<-ifelse(data99d$CAMEO.Code=="241", 1, NA)
-data99d$Appeal_Policy_Change<-ifelse(data99d$CAMEO.Code=="242", 1, NA)
-data99d$Appeal_Rights<-ifelse(data99d$CAMEO.Code=="243", 1, NA)
-data99d$Appeal_Change_Inst<-ifelse(data99d$CAMEO.Code=="244", 1, NA)
-data99d$Appeal_Release<-ifelse(data99d$CAMEO.Code=="253", 1, NA)
-data99d$Demand<-ifelse(data99d$CAMEO.Code=="100", 1, NA)
-data99d$Demand_Change_Leadership<-ifelse(data99d$CAMEO.Code=="1041", 1, NA) 
-data99d$Demand_Policy_Change<-ifelse(data99d$CAMEO.Code=="1042", 1, NA)
-data99d$Demand_Rights<-ifelse(data99d$CAMEO.Code=="1043", 1, NA)
-data99d$Demand_Change_Inst<-ifelse(data99d$CAMEO.Code=="1044", 1, NA)
-data99d$Accuse_HR<-ifelse(data99d$CAMEO.Code=="1122", 1, NA)
-data99d$Accuse<-ifelse(data99d$CAMEO.Code=="112", 1, NA)
-data99d$Criticize<-ifelse(data99d$CAMEO.Code=="111", 1, NA)
-data99d$Investigate_War_Crimes<-ifelse(data99d$CAMEO.Code=="94", 1, NA)
-data99d$Investigate_HR<-ifelse(data99d$CAMEO.Code=="92", 1, NA)
-data99d$Demand_Jud_Coop<-ifelse(data99d$CAMEO.Code=="1013", 1, NA)
-data99d$Demand_Hum_Aid<-ifelse(data99d$CAMEO.Code=="1033", 1, NA)
-data99d$Demand_Release<-ifelse(data99d$CAMEO.Code=="1053", 1, NA)
-data99d$Accuse_War_Crimes<-ifelse(data99d$CAMEO.Code=="1124", 1, NA)
+data99d$CC10<-ifelse(data99d$CAMEO.Code=="10", 1, 0)
+data99d$CC12<-ifelse(data99d$CAMEO.Code=="12", 1, 0)
+data99d$CC20<-ifelse(data99d$CAMEO.Code=="20", 1, 0)
+data99d$CC22<-ifelse(data99d$CAMEO.Code=="22", 1, 0)
+data99d$CC23<-ifelse(data99d$CAMEO.Code=="23", 1, 0)
+data99d$CC24<-ifelse(data99d$CAMEO.Code=="24", 1, 0)
+data99d$CC25<-ifelse(data99d$CAMEO.Code=="25", 1, 0)
+data99d$CC90<-ifelse(data99d$CAMEO.Code=="90", 1, 0)
+data99d$CC91<-ifelse(data99d$CAMEO.Code=="91", 1, 0)
+data99d$CC92<-ifelse(data99d$CAMEO.Code=="92", 1, 0)
+data99d$CC94<-ifelse(data99d$CAMEO.Code=="94", 1, 0)
+data99d$CC100<-ifelse(data99d$CAMEO.Code=="100", 1, 0)
+data99d$CC101<-ifelse(data99d$CAMEO.Code=="101", 1, 0)
+data99d$CC102<-ifelse(data99d$CAMEO.Code=="102", 1, 0)
+data99d$CC103<-ifelse(data99d$CAMEO.Code=="103", 1, 0)
+data99d$CC104<-ifelse(data99d$CAMEO.Code=="104", 1, 0)
+data99d$CC106<-ifelse(data99d$CAMEO.Code=="106", 1, 0)
+data99d$CC108<-ifelse(data99d$CAMEO.Code=="108", 1, 0)
+data99d$CC111<-ifelse(data99d$CAMEO.Code=="111", 1, 0)
+data99d$CC112<-ifelse(data99d$CAMEO.Code=="112", 1, 0)
+data99d$CC113<-ifelse(data99d$CAMEO.Code=="113", 1, 0)
+data99d$CC114<-ifelse(data99d$CAMEO.Code=="114", 1, 0)
+data99d$CC124<-ifelse(data99d$CAMEO.Code=="124", 1, 0)
+data99d$CC130<-ifelse(data99d$CAMEO.Code=="130", 1, 0)
+data99d$CC131<-ifelse(data99d$CAMEO.Code=="131", 1, 0)
+data99d$CC133<-ifelse(data99d$CAMEO.Code=="133", 1, 0)
+data99d$CC138<-ifelse(data99d$CAMEO.Code=="138", 1, 0)
+data99d$CC139<-ifelse(data99d$CAMEO.Code=="139", 1, 0)
+data99d$CC163<-ifelse(data99d$CAMEO.Code=="163", 1, 0)
+data99d$CC213<-ifelse(data99d$CAMEO.Code=="213", 1, 0)
+data99d$CC214<-ifelse(data99d$CAMEO.Code=="214", 1, 0)
+data99d$CC241<-ifelse(data99d$CAMEO.Code=="241", 1, 0)
+data99d$CC242<-ifelse(data99d$CAMEO.Code=="242", 1, 0)
+data99d$CC243<-ifelse(data99d$CAMEO.Code=="243", 1, 0)
+data99d$CC244<-ifelse(data99d$CAMEO.Code=="244", 1, 0)
+data99d$CC253<-ifelse(data99d$CAMEO.Code=="253", 1, 0)
+data99d$CC255<-ifelse(data99d$CAMEO.Code=="255", 1, 0)
+data99d$CC256<-ifelse(data99d$CAMEO.Code=="256", 1, 0)
+data99d$CC1041<-ifelse(data99d$CAMEO.Code=="1041", 1, 0)
+data99d$CC1042<-ifelse(data99d$CAMEO.Code=="1042", 1, 0)
+data99d$CC1043<-ifelse(data99d$CAMEO.Code=="1043", 1, 0)
+data99d$CC1053<-ifelse(data99d$CAMEO.Code=="1053", 1, 0)
+data99d$CC1056<-ifelse(data99d$CAMEO.Code=="1056", 1, 0)
+data99d$CC1121<-ifelse(data99d$CAMEO.Code=="1121", 1, 0)
+data99d$CC1122<-ifelse(data99d$CAMEO.Code=="1122", 1, 0)
+data99d$CC1123<-ifelse(data99d$CAMEO.Code=="1123", 1, 0)
+data99d$CC1124<-ifelse(data99d$CAMEO.Code=="1124", 1, 0)
+data99d$CC1125<-ifelse(data99d$CAMEO.Code=="1125", 1, 0)
+data99d$CC1242<-ifelse(data99d$CAMEO.Code=="1242", 1, 0)
+data99d$CC93 <- ifelse(data99d$CAMEO.Code=="93", 1, 0)
+data99d$CC1014 <- ifelse(data99d$CAMEO.Code=="1014", 1, 0)
 
 
 
 data99e<-separate(data99d, "Event.Date", paste("Date", 1:3, sep="_"), sep="-", extra="drop")
 
-event.counts1999<-summaryBy(Appeal_Jud_Coop + Appeal_Change_Leadership + Appeal_Policy_Change + 
-                                   Appeal_Rights + Appeal_Change_Inst + Demand + Demand_Change_Leadership
-                           + Demand_Policy_Change + Demand_Rights + Demand_Change_Inst + Appeal_Release
-                           + Accuse_HR + Accuse + Criticize + Investigate_War_Crimes + Investigate_HR + Demand_Jud_Coop + Demand_Hum_Aid 
-                           + Demand_Release + Accuse_War_Crimes ~ Country + Date_1, 
+event.count1999<-summaryBy(CC10+ CC12 + CC20 + CC22 + CC23 + CC24 + CC25 
+                           + CC90 + CC91+ CC92+ CC93+ CC94 + CC100 + 
+                                   CC101 + CC102 + CC103 + CC104 + CC106 + 
+                                   CC108+ CC111 +CC112 + CC113 + CC114 + CC124 
+                           + CC130 + CC131 + CC133 + CC138 + CC139 + 
+                                   CC163 + CC213 + CC214 + CC241 + CC242 + 
+                                   CC243 + CC244 + CC253 + CC255 + CC256 + 
+                                   CC1014 + CC1041 + CC1042 + CC1043 + CC1053 + 
+                                   CC1056 + CC1121 + CC1122 + CC1123 + CC1124 + 
+                                   CC1125 + CC1242  ~ Country + Date_1, 
                            FUN=sum, data=data99e)
 
 
 
-write.csv(event.counts1999, "/Users/KimFruge/Desktop/Projects/JAHRO/event.counts1999.cvs") 
+write.csv(event.count1999, "/Volumes/Lexar/event.counts1999.csv") 
 
 
 
 #_____________________
 
-Events00 <- read.csv2("/Users/KimFruge/Desktop/Projects/Event2000.tab",  sep="\t", header=TRUE)
+Events00 <- read.csv2("/Volumes/Lexar/Events2000.tab",  sep="\t", header=TRUE)
 
 data00a<-separate(Events00, "Target.Sectors", paste("Target.Sectors", 1:17, sep="_"), sep=",", extra="drop")
 
@@ -497,48 +675,84 @@ data00c<-subset(data00b,
 )
 
 data00d<-data00c
-data00d$Appeal_Jud_Coop<-ifelse(data00d$CAMEO.Code=="213", 1, NA)
-data00d$Appeal_Change_Leadership<-ifelse(data00d$CAMEO.Code=="241", 1, NA)
-data00d$Appeal_Policy_Change<-ifelse(data00d$CAMEO.Code=="242", 1, NA)
-data00d$Appeal_Rights<-ifelse(data00d$CAMEO.Code=="243", 1, NA)
-data00d$Appeal_Change_Inst<-ifelse(data00d$CAMEO.Code=="244", 1, NA)
-data00d$Appeal_Release<-ifelse(data00d$CAMEO.Code=="253", 1, NA)
-data00d$Demand<-ifelse(data00d$CAMEO.Code=="100", 1, NA)
-data00d$Demand_Change_Leadership<-ifelse(data00d$CAMEO.Code=="1041", 1, NA) 
-data00d$Demand_Policy_Change<-ifelse(data00d$CAMEO.Code=="1042", 1, NA)
-data00d$Demand_Rights<-ifelse(data00d$CAMEO.Code=="1043", 1, NA)
-data00d$Demand_Change_Inst<-ifelse(data00d$CAMEO.Code=="1044", 1, NA)
-data00d$Accuse_HR<-ifelse(data00d$CAMEO.Code=="1122", 1, NA)
-data00d$Accuse<-ifelse(data00d$CAMEO.Code=="112", 1, NA)
-data00d$Criticize<-ifelse(data00d$CAMEO.Code=="111", 1, NA)
-data00d$Investigate_War_Crimes<-ifelse(data00d$CAMEO.Code=="94", 1, NA)
-data00d$Investigate_HR<-ifelse(data00d$CAMEO.Code=="92", 1, NA)
-data00d$Demand_Jud_Coop<-ifelse(data00d$CAMEO.Code=="1013", 1, NA)
-data00d$Demand_Hum_Aid<-ifelse(data00d$CAMEO.Code=="1033", 1, NA)
-data00d$Demand_Release<-ifelse(data00d$CAMEO.Code=="1053", 1, NA)
-data00d$Accuse_War_Crimes<-ifelse(data00d$CAMEO.Code=="1124", 1, NA)
+data00d$CC10<-ifelse(data00d$CAMEO.Code=="10", 1, 0)
+data00d$CC12<-ifelse(data00d$CAMEO.Code=="12", 1, 0)
+data00d$CC20<-ifelse(data00d$CAMEO.Code=="20", 1, 0)
+data00d$CC22<-ifelse(data00d$CAMEO.Code=="22", 1, 0)
+data00d$CC23<-ifelse(data00d$CAMEO.Code=="23", 1, 0)
+data00d$CC24<-ifelse(data00d$CAMEO.Code=="24", 1, 0)
+data00d$CC25<-ifelse(data00d$CAMEO.Code=="25", 1, 0)
+data00d$CC90<-ifelse(data00d$CAMEO.Code=="90", 1, 0)
+data00d$CC91<-ifelse(data00d$CAMEO.Code=="91", 1, 0)
+data00d$CC92<-ifelse(data00d$CAMEO.Code=="92", 1, 0)
+data00d$CC94<-ifelse(data00d$CAMEO.Code=="94", 1, 0)
+data00d$CC100<-ifelse(data00d$CAMEO.Code=="100", 1, 0)
+data00d$CC101<-ifelse(data00d$CAMEO.Code=="101", 1, 0)
+data00d$CC102<-ifelse(data00d$CAMEO.Code=="102", 1, 0)
+data00d$CC103<-ifelse(data00d$CAMEO.Code=="103", 1, 0)
+data00d$CC104<-ifelse(data00d$CAMEO.Code=="104", 1, 0)
+data00d$CC106<-ifelse(data00d$CAMEO.Code=="106", 1, 0)
+data00d$CC108<-ifelse(data00d$CAMEO.Code=="108", 1, 0)
+data00d$CC111<-ifelse(data00d$CAMEO.Code=="111", 1, 0)
+data00d$CC112<-ifelse(data00d$CAMEO.Code=="112", 1, 0)
+data00d$CC113<-ifelse(data00d$CAMEO.Code=="113", 1, 0)
+data00d$CC114<-ifelse(data00d$CAMEO.Code=="114", 1, 0)
+data00d$CC124<-ifelse(data00d$CAMEO.Code=="124", 1, 0)
+data00d$CC130<-ifelse(data00d$CAMEO.Code=="130", 1, 0)
+data00d$CC131<-ifelse(data00d$CAMEO.Code=="131", 1, 0)
+data00d$CC133<-ifelse(data00d$CAMEO.Code=="133", 1, 0)
+data00d$CC138<-ifelse(data00d$CAMEO.Code=="138", 1, 0)
+data00d$CC139<-ifelse(data00d$CAMEO.Code=="139", 1, 0)
+data00d$CC163<-ifelse(data00d$CAMEO.Code=="163", 1, 0)
+data00d$CC213<-ifelse(data00d$CAMEO.Code=="213", 1, 0)
+data00d$CC214<-ifelse(data00d$CAMEO.Code=="214", 1, 0)
+data00d$CC241<-ifelse(data00d$CAMEO.Code=="241", 1, 0)
+data00d$CC242<-ifelse(data00d$CAMEO.Code=="242", 1, 0)
+data00d$CC243<-ifelse(data00d$CAMEO.Code=="243", 1, 0)
+data00d$CC244<-ifelse(data00d$CAMEO.Code=="244", 1, 0)
+data00d$CC253<-ifelse(data00d$CAMEO.Code=="253", 1, 0)
+data00d$CC255<-ifelse(data00d$CAMEO.Code=="255", 1, 0)
+data00d$CC256<-ifelse(data00d$CAMEO.Code=="256", 1, 0)
+data00d$CC1041<-ifelse(data00d$CAMEO.Code=="1041", 1, 0)
+data00d$CC1042<-ifelse(data00d$CAMEO.Code=="1042", 1, 0)
+data00d$CC1043<-ifelse(data00d$CAMEO.Code=="1043", 1, 0)
+data00d$CC1053<-ifelse(data00d$CAMEO.Code=="1053", 1, 0)
+data00d$CC1056<-ifelse(data00d$CAMEO.Code=="1056", 1, 0)
+data00d$CC1121<-ifelse(data00d$CAMEO.Code=="1121", 1, 0)
+data00d$CC1122<-ifelse(data00d$CAMEO.Code=="1122", 1, 0)
+data00d$CC1123<-ifelse(data00d$CAMEO.Code=="1123", 1, 0)
+data00d$CC1124<-ifelse(data00d$CAMEO.Code=="1124", 1, 0)
+data00d$CC1125<-ifelse(data00d$CAMEO.Code=="1125", 1, 0)
+data00d$CC1242<-ifelse(data00d$CAMEO.Code=="1242", 1, 0)
+data00d$CC93 <- ifelse(data00d$CAMEO.Code=="93", 1, 0)
+data00d$CC1014 <- ifelse(data00d$CAMEO.Code=="1014", 1, 0)
 
 
 
 data00e<-separate(data00d, "Event.Date", paste("Date", 1:3, sep="_"), sep="-", extra="drop")
 
-event.counts2000<-summaryBy(Appeal_Jud_Coop + Appeal_Change_Leadership + Appeal_Policy_Change + 
-                                   Appeal_Rights + Appeal_Change_Inst + Demand + Demand_Change_Leadership
-                           + Demand_Policy_Change + Demand_Rights + Demand_Change_Inst + Appeal_Release
-                           + Accuse_HR + Accuse + Criticize + Investigate_War_Crimes + Investigate_HR + Demand_Jud_Coop + Demand_Hum_Aid 
-                           + Demand_Release + Accuse_War_Crimes ~ Country + Date_1, 
+event.count2000<-summaryBy(CC10+ CC12 + CC20 + CC22 + CC23 + CC24 + CC25 
+                           + CC90 + CC91+ CC92+ CC93+ CC94 + CC100 + 
+                                   CC101 + CC102 + CC103 + CC104 + CC106 + 
+                                   CC108+ CC111 +CC112 + CC113 + CC114 + CC124 
+                           + CC130 + CC131 + CC133 + CC138 + CC139 + 
+                                   CC163 + CC213 + CC214 + CC241 + CC242 + 
+                                   CC243 + CC244 + CC253 + CC255 + CC256 + 
+                                   CC1014 + CC1041 + CC1042 + CC1043 + CC1053 + 
+                                   CC1056 + CC1121 + CC1122 + CC1123 + CC1124 + 
+                                   CC1125 + CC1242  ~ Country + Date_1, 
                            FUN=sum, data=data00e)
 
 
 
-write.csv(event.counts2000, "/Users/KimFruge/Desktop/Projects/JAHRO/event.counts2000.cvs") 
+write.csv(event.count2000, "/Volumes/Lexar/event.counts2000.csv") 
 
 
 
 #______________________
 
 
-Events01<- read.csv2("/Users/KimFruge/Desktop/Projects/Events2001.tab",  sep="\t", header=TRUE)
+Events01<- read.csv2("/Volumes/Lexar/Events2001.tab",  sep="\t", header=TRUE)
 
 data01a<-separate(Events01, "Target.Sectors", paste("Target.Sectors", 1:17, sep="_"), sep=",", extra="drop")
 
@@ -587,47 +801,84 @@ data01c<-subset(data01b,
 )
 
 data01d<-data01c
-data01d$Appeal_Jud_Coop<-ifelse(data01d$CAMEO.Code=="213", 1, NA)
-data01d$Appeal_Change_Leadership<-ifelse(data01d$CAMEO.Code=="241", 1, NA)
-data01d$Appeal_Policy_Change<-ifelse(data01d$CAMEO.Code=="242", 1, NA)
-data01d$Appeal_Rights<-ifelse(data01d$CAMEO.Code=="243", 1, NA)
-data01d$Appeal_Change_Inst<-ifelse(data01d$CAMEO.Code=="244", 1, NA)
-data01d$Appeal_Release<-ifelse(data01d$CAMEO.Code=="253", 1, NA)
-data01d$Demand<-ifelse(data01d$CAMEO.Code=="100", 1, NA)
-data01d$Demand_Change_Leadership<-ifelse(data01d$CAMEO.Code=="1041", 1, NA) 
-data01d$Demand_Policy_Change<-ifelse(data01d$CAMEO.Code=="1042", 1, NA)
-data01d$Demand_Rights<-ifelse(data01d$CAMEO.Code=="1043", 1, NA)
-data01d$Demand_Change_Inst<-ifelse(data01d$CAMEO.Code=="1044", 1, NA)
-data01d$Accuse_HR<-ifelse(data01d$CAMEO.Code=="1122", 1, NA)
-data01d$Accuse<-ifelse(data01d$CAMEO.Code=="112", 1, NA)
-data01d$Criticize<-ifelse(data01d$CAMEO.Code=="111", 1, NA)
-data01d$Investigate_War_Crimes<-ifelse(data01d$CAMEO.Code=="94", 1, NA)
-data01d$Investigate_HR<-ifelse(data01d$CAMEO.Code=="92", 1, NA)
-data01d$Demand_Jud_Coop<-ifelse(data01d$CAMEO.Code=="1013", 1, NA)
-data01d$Demand_Hum_Aid<-ifelse(data01d$CAMEO.Code=="1033", 1, NA)
-data01d$Demand_Release<-ifelse(data01d$CAMEO.Code=="1053", 1, NA)
-data01d$Accuse_War_Crimes<-ifelse(data01d$CAMEO.Code=="1124", 1, NA)
+data01d$CC10<-ifelse(data01d$CAMEO.Code=="10", 1, 0)
+data01d$CC12<-ifelse(data01d$CAMEO.Code=="12", 1, 0)
+data01d$CC20<-ifelse(data01d$CAMEO.Code=="20", 1, 0)
+data01d$CC22<-ifelse(data01d$CAMEO.Code=="22", 1, 0)
+data01d$CC23<-ifelse(data01d$CAMEO.Code=="23", 1, 0)
+data01d$CC24<-ifelse(data01d$CAMEO.Code=="24", 1, 0)
+data01d$CC25<-ifelse(data01d$CAMEO.Code=="25", 1, 0)
+data01d$CC90<-ifelse(data01d$CAMEO.Code=="90", 1, 0)
+data01d$CC91<-ifelse(data01d$CAMEO.Code=="91", 1, 0)
+data01d$CC92<-ifelse(data01d$CAMEO.Code=="92", 1, 0)
+data01d$CC94<-ifelse(data01d$CAMEO.Code=="94", 1, 0)
+data01d$CC100<-ifelse(data01d$CAMEO.Code=="100", 1, 0)
+data01d$CC101<-ifelse(data01d$CAMEO.Code=="101", 1, 0)
+data01d$CC102<-ifelse(data01d$CAMEO.Code=="102", 1, 0)
+data01d$CC103<-ifelse(data01d$CAMEO.Code=="103", 1, 0)
+data01d$CC104<-ifelse(data01d$CAMEO.Code=="104", 1, 0)
+data01d$CC106<-ifelse(data01d$CAMEO.Code=="106", 1, 0)
+data01d$CC108<-ifelse(data01d$CAMEO.Code=="108", 1, 0)
+data01d$CC111<-ifelse(data01d$CAMEO.Code=="111", 1, 0)
+data01d$CC112<-ifelse(data01d$CAMEO.Code=="112", 1, 0)
+data01d$CC113<-ifelse(data01d$CAMEO.Code=="113", 1, 0)
+data01d$CC114<-ifelse(data01d$CAMEO.Code=="114", 1, 0)
+data01d$CC124<-ifelse(data01d$CAMEO.Code=="124", 1, 0)
+data01d$CC130<-ifelse(data01d$CAMEO.Code=="130", 1, 0)
+data01d$CC131<-ifelse(data01d$CAMEO.Code=="131", 1, 0)
+data01d$CC133<-ifelse(data01d$CAMEO.Code=="133", 1, 0)
+data01d$CC138<-ifelse(data01d$CAMEO.Code=="138", 1, 0)
+data01d$CC139<-ifelse(data01d$CAMEO.Code=="139", 1, 0)
+data01d$CC163<-ifelse(data01d$CAMEO.Code=="163", 1, 0)
+data01d$CC213<-ifelse(data01d$CAMEO.Code=="213", 1, 0)
+data01d$CC214<-ifelse(data01d$CAMEO.Code=="214", 1, 0)
+data01d$CC241<-ifelse(data01d$CAMEO.Code=="241", 1, 0)
+data01d$CC242<-ifelse(data01d$CAMEO.Code=="242", 1, 0)
+data01d$CC243<-ifelse(data01d$CAMEO.Code=="243", 1, 0)
+data01d$CC244<-ifelse(data01d$CAMEO.Code=="244", 1, 0)
+data01d$CC253<-ifelse(data01d$CAMEO.Code=="253", 1, 0)
+data01d$CC255<-ifelse(data01d$CAMEO.Code=="255", 1, 0)
+data01d$CC256<-ifelse(data01d$CAMEO.Code=="256", 1, 0)
+data01d$CC1041<-ifelse(data01d$CAMEO.Code=="1041", 1, 0)
+data01d$CC1042<-ifelse(data01d$CAMEO.Code=="1042", 1, 0)
+data01d$CC1043<-ifelse(data01d$CAMEO.Code=="1043", 1, 0)
+data01d$CC1053<-ifelse(data01d$CAMEO.Code=="1053", 1, 0)
+data01d$CC1056<-ifelse(data01d$CAMEO.Code=="1056", 1, 0)
+data01d$CC1121<-ifelse(data01d$CAMEO.Code=="1121", 1, 0)
+data01d$CC1122<-ifelse(data01d$CAMEO.Code=="1122", 1, 0)
+data01d$CC1123<-ifelse(data01d$CAMEO.Code=="1123", 1, 0)
+data01d$CC1124<-ifelse(data01d$CAMEO.Code=="1124", 1, 0)
+data01d$CC1125<-ifelse(data01d$CAMEO.Code=="1125", 1, 0)
+data01d$CC1242<-ifelse(data01d$CAMEO.Code=="1242", 1, 0)
+data01d$CC93 <- ifelse(data01d$CAMEO.Code=="93", 1, 0)
+data01d$CC1014 <- ifelse(data01d$CAMEO.Code=="1014", 1, 0)
+
 
 
 
 data01e<-separate(data01d, "Event.Date", paste("Date", 1:3, sep="_"), sep="-", extra="drop")
 
-event.counts2001<-summaryBy(Appeal_Jud_Coop + Appeal_Change_Leadership + Appeal_Policy_Change + 
-                                   Appeal_Rights + Appeal_Change_Inst + Demand + Demand_Change_Leadership
-                           + Demand_Policy_Change + Demand_Rights + Demand_Change_Inst + Appeal_Release
-                           + Accuse_HR + Accuse + Criticize + Investigate_War_Crimes + Investigate_HR + Demand_Jud_Coop + Demand_Hum_Aid 
-                           + Demand_Release + Accuse_War_Crimes ~ Country + Date_1, 
+event.count2001<-summaryBy(CC10+ CC12 + CC20 + CC22 + CC23 + CC24 + CC25 
+                           + CC90 + CC91+ CC92+ CC93+ CC94 + CC100 + 
+                                   CC101 + CC102 + CC103 + CC104 + CC106 + 
+                                   CC108+ CC111 +CC112 + CC113 + CC114 + CC124 
+                           + CC130 + CC131 + CC133 + CC138 + CC139 + 
+                                   CC163 + CC213 + CC214 + CC241 + CC242 + 
+                                   CC243 + CC244 + CC253 + CC255 + CC256 + 
+                                   CC1014 + CC1041 + CC1042 + CC1043 + CC1053 + 
+                                   CC1056 + CC1121 + CC1122 + CC1123 + CC1124 + 
+                                   CC1125 + CC1242  ~ Country + Date_1, 
                            FUN=sum, data=data01e)
 
 
 
-write.csv(event.counts2001, "/Users/KimFruge/Desktop/Projects/JAHRO/event.counts2001.cvs") 
+write.csv(event.count2001, "/Volumes/Lexar/event.counts2001.csv") 
 
 
 
 #__________________________
 
-Events02<- read.csv2("/Users/KimFruge/Desktop/Projects/Events2002.tab",  sep="\t", header=TRUE)
+Events02<- read.csv2("/Volumes/Lexar/Events2002.tab",  sep="\t", header=TRUE)
 
 data02a<-separate(Events02, "Target.Sectors", paste("Target.Sectors", 1:17, sep="_"), sep=",", extra="drop")
 
@@ -676,47 +927,83 @@ data02c<-subset(data02b,
 )
 
 data02d<-data02c
-data02d$Appeal_Jud_Coop<-ifelse(data02d$CAMEO.Code=="213", 1, NA)
-data02d$Appeal_Change_Leadership<-ifelse(data02d$CAMEO.Code=="241", 1, NA)
-data02d$Appeal_Policy_Change<-ifelse(data02d$CAMEO.Code=="242", 1, NA)
-data02d$Appeal_Rights<-ifelse(data02d$CAMEO.Code=="243", 1, NA)
-data02d$Appeal_Change_Inst<-ifelse(data02d$CAMEO.Code=="244", 1, NA)
-data02d$Appeal_Release<-ifelse(data02d$CAMEO.Code=="253", 1, NA)
-data02d$Demand<-ifelse(data02d$CAMEO.Code=="100", 1, NA)
-data02d$Demand_Change_Leadership<-ifelse(data02d$CAMEO.Code=="1041", 1, NA) 
-data02d$Demand_Policy_Change<-ifelse(data02d$CAMEO.Code=="1042", 1, NA)
-data02d$Demand_Rights<-ifelse(data02d$CAMEO.Code=="1043", 1, NA)
-data02d$Demand_Change_Inst<-ifelse(data02d$CAMEO.Code=="1044", 1, NA)
-data02d$Accuse_HR<-ifelse(data02d$CAMEO.Code=="1122", 1, NA)
-data02d$Accuse<-ifelse(data02d$CAMEO.Code=="112", 1, NA)
-data02d$Criticize<-ifelse(data02d$CAMEO.Code=="111", 1, NA)
-data02d$Investigate_War_Crimes<-ifelse(data02d$CAMEO.Code=="94", 1, NA)
-data02d$Investigate_HR<-ifelse(data02d$CAMEO.Code=="92", 1, NA)
-data02d$Demand_Jud_Coop<-ifelse(data02d$CAMEO.Code=="1013", 1, NA)
-data02d$Demand_Hum_Aid<-ifelse(data02d$CAMEO.Code=="1033", 1, NA)
-data02d$Demand_Release<-ifelse(data02d$CAMEO.Code=="1053", 1, NA)
-data02d$Accuse_War_Crimes<-ifelse(data02d$CAMEO.Code=="1124", 1, NA)
+data02d$CC10<-ifelse(data02d$CAMEO.Code=="10", 1, 0)
+data02d$CC12<-ifelse(data02d$CAMEO.Code=="12", 1, 0)
+data02d$CC20<-ifelse(data02d$CAMEO.Code=="20", 1, 0)
+data02d$CC22<-ifelse(data02d$CAMEO.Code=="22", 1, 0)
+data02d$CC23<-ifelse(data02d$CAMEO.Code=="23", 1, 0)
+data02d$CC24<-ifelse(data02d$CAMEO.Code=="24", 1, 0)
+data02d$CC25<-ifelse(data02d$CAMEO.Code=="25", 1, 0)
+data02d$CC90<-ifelse(data02d$CAMEO.Code=="90", 1, 0)
+data02d$CC91<-ifelse(data02d$CAMEO.Code=="91", 1, 0)
+data02d$CC92<-ifelse(data02d$CAMEO.Code=="92", 1, 0)
+data02d$CC94<-ifelse(data02d$CAMEO.Code=="94", 1, 0)
+data02d$CC100<-ifelse(data02d$CAMEO.Code=="100", 1, 0)
+data02d$CC101<-ifelse(data02d$CAMEO.Code=="101", 1, 0)
+data02d$CC102<-ifelse(data02d$CAMEO.Code=="102", 1, 0)
+data02d$CC103<-ifelse(data02d$CAMEO.Code=="103", 1, 0)
+data02d$CC104<-ifelse(data02d$CAMEO.Code=="104", 1, 0)
+data02d$CC106<-ifelse(data02d$CAMEO.Code=="106", 1, 0)
+data02d$CC108<-ifelse(data02d$CAMEO.Code=="108", 1, 0)
+data02d$CC111<-ifelse(data02d$CAMEO.Code=="111", 1, 0)
+data02d$CC112<-ifelse(data02d$CAMEO.Code=="112", 1, 0)
+data02d$CC113<-ifelse(data02d$CAMEO.Code=="113", 1, 0)
+data02d$CC114<-ifelse(data02d$CAMEO.Code=="114", 1, 0)
+data02d$CC124<-ifelse(data02d$CAMEO.Code=="124", 1, 0)
+data02d$CC130<-ifelse(data02d$CAMEO.Code=="130", 1, 0)
+data02d$CC131<-ifelse(data02d$CAMEO.Code=="131", 1, 0)
+data02d$CC133<-ifelse(data02d$CAMEO.Code=="133", 1, 0)
+data02d$CC138<-ifelse(data02d$CAMEO.Code=="138", 1, 0)
+data02d$CC139<-ifelse(data02d$CAMEO.Code=="139", 1, 0)
+data02d$CC163<-ifelse(data02d$CAMEO.Code=="163", 1, 0)
+data02d$CC213<-ifelse(data02d$CAMEO.Code=="213", 1, 0)
+data02d$CC214<-ifelse(data02d$CAMEO.Code=="214", 1, 0)
+data02d$CC241<-ifelse(data02d$CAMEO.Code=="241", 1, 0)
+data02d$CC242<-ifelse(data02d$CAMEO.Code=="242", 1, 0)
+data02d$CC243<-ifelse(data02d$CAMEO.Code=="243", 1, 0)
+data02d$CC244<-ifelse(data02d$CAMEO.Code=="244", 1, 0)
+data02d$CC253<-ifelse(data02d$CAMEO.Code=="253", 1, 0)
+data02d$CC255<-ifelse(data02d$CAMEO.Code=="255", 1, 0)
+data02d$CC256<-ifelse(data02d$CAMEO.Code=="256", 1, 0)
+data02d$CC1041<-ifelse(data02d$CAMEO.Code=="1041", 1, 0)
+data02d$CC1042<-ifelse(data02d$CAMEO.Code=="1042", 1, 0)
+data02d$CC1043<-ifelse(data02d$CAMEO.Code=="1043", 1, 0)
+data02d$CC1053<-ifelse(data02d$CAMEO.Code=="1053", 1, 0)
+data02d$CC1056<-ifelse(data02d$CAMEO.Code=="1056", 1, 0)
+data02d$CC1121<-ifelse(data02d$CAMEO.Code=="1121", 1, 0)
+data02d$CC1122<-ifelse(data02d$CAMEO.Code=="1122", 1, 0)
+data02d$CC1123<-ifelse(data02d$CAMEO.Code=="1123", 1, 0)
+data02d$CC1124<-ifelse(data02d$CAMEO.Code=="1124", 1, 0)
+data02d$CC1125<-ifelse(data02d$CAMEO.Code=="1125", 1, 0)
+data02d$CC1242<-ifelse(data02d$CAMEO.Code=="1242", 1, 0)
+data02d$CC93 <- ifelse(data02d$CAMEO.Code=="93", 1, 0)
+data02d$CC1014 <- ifelse(data02d$CAMEO.Code=="1014", 1, 0)
 
 
 
 data02e<-separate(data02d, "Event.Date", paste("Date", 1:3, sep="_"), sep="-", extra="drop")
 
-event.counts2002<-summaryBy(Appeal_Jud_Coop + Appeal_Change_Leadership + Appeal_Policy_Change + 
-                                   Appeal_Rights + Appeal_Change_Inst + Demand + Demand_Change_Leadership
-                           + Demand_Policy_Change + Demand_Rights + Demand_Change_Inst + Appeal_Release
-                           + Accuse_HR + Accuse + Criticize + Investigate_War_Crimes + Investigate_HR + Demand_Jud_Coop + Demand_Hum_Aid 
-                           + Demand_Release + Accuse_War_Crimes ~ Country + Date_1, 
+event.count2002<-summaryBy(CC10+ CC12 + CC20 + CC22 + CC23 + CC24 + CC25 
+                           + CC90 + CC91+ CC92+ CC93+ CC94 + CC100 + 
+                                   CC101 + CC102 + CC103 + CC104 + CC106 + 
+                                   CC108+ CC111 +CC112 + CC113 + CC114 + CC124 
+                           + CC130 + CC131 + CC133 + CC138 + CC139 + 
+                                   CC163 + CC213 + CC214 + CC241 + CC242 + 
+                                   CC243 + CC244 + CC253 + CC255 + CC256 + 
+                                   CC1014 + CC1041 + CC1042 + CC1043 + CC1053 + 
+                                   CC1056 + CC1121 + CC1122 + CC1123 + CC1124 + 
+                                   CC1125 + CC1242  ~ Country + Date_1, 
                            FUN=sum, data=data02e)
 
 
 
-write.csv(event.counts2002, "/Users/KimFruge/Desktop/Projects/JAHRO/event.counts2002.cvs") 
+write.csv(event.count2002, "E:/event.counts2002.csv") 
 
 
 
 #________________________
 
-Events03 <- read.csv2("/Users/KimFruge/Desktop/Projects/Events2003.tab",  sep="\t", header=TRUE)
+Events03 <- read.csv2("/Volumes/Lexar/Events2003.tab",  sep="\t", header=TRUE)
 
 data03a<-separate(Events03, "Target.Sectors", paste("Target.Sectors", 1:17, sep="_"), sep=",", extra="drop")
 
@@ -765,44 +1052,80 @@ data03c<-subset(data03b,
 )
 
 data03d<-data03c
-data03d$Appeal_Jud_Coop<-ifelse(data03d$CAMEO.Code=="213", 1, NA)
-data03d$Appeal_Change_Leadership<-ifelse(data03d$CAMEO.Code=="241", 1, NA)
-data03d$Appeal_Policy_Change<-ifelse(data03d$CAMEO.Code=="242", 1, NA)
-data03d$Appeal_Rights<-ifelse(data03d$CAMEO.Code=="243", 1, NA)
-data03d$Appeal_Change_Inst<-ifelse(data03d$CAMEO.Code=="244", 1, NA)
-data03d$Appeal_Release<-ifelse(data03d$CAMEO.Code=="253", 1, NA)
-data03d$Demand<-ifelse(data03d$CAMEO.Code=="100", 1, NA)
-data03d$Demand_Change_Leadership<-ifelse(data03d$CAMEO.Code=="1041", 1, NA) 
-data03d$Demand_Policy_Change<-ifelse(data03d$CAMEO.Code=="1042", 1, NA)
-data03d$Demand_Rights<-ifelse(data03d$CAMEO.Code=="1043", 1, NA)
-data03d$Demand_Change_Inst<-ifelse(data03d$CAMEO.Code=="1044", 1, NA)
-data03d$Accuse_HR<-ifelse(data03d$CAMEO.Code=="1122", 1, NA)
-data03d$Accuse<-ifelse(data03d$CAMEO.Code=="112", 1, NA)
-data03d$Criticize<-ifelse(data03d$CAMEO.Code=="111", 1, NA)
-data03d$Investigate_War_Crimes<-ifelse(data03d$CAMEO.Code=="94", 1, NA)
-data03d$Investigate_HR<-ifelse(data03d$CAMEO.Code=="92", 1, NA)
-data03d$Demand_Jud_Coop<-ifelse(data03d$CAMEO.Code=="1013", 1, NA)
-data03d$Demand_Hum_Aid<-ifelse(data03d$CAMEO.Code=="1033", 1, NA)
-data03d$Demand_Release<-ifelse(data03d$CAMEO.Code=="1053", 1, NA)
-data03d$Accuse_War_Crimes<-ifelse(data03d$CAMEO.Code=="1124", 1, NA)
+data03d$CC10<-ifelse(data03d$CAMEO.Code=="10", 1, 0)
+data03d$CC12<-ifelse(data03d$CAMEO.Code=="12", 1, 0)
+data03d$CC20<-ifelse(data03d$CAMEO.Code=="20", 1, 0)
+data03d$CC22<-ifelse(data03d$CAMEO.Code=="22", 1, 0)
+data03d$CC23<-ifelse(data03d$CAMEO.Code=="23", 1, 0)
+data03d$CC24<-ifelse(data03d$CAMEO.Code=="24", 1, 0)
+data03d$CC25<-ifelse(data03d$CAMEO.Code=="25", 1, 0)
+data03d$CC90<-ifelse(data03d$CAMEO.Code=="90", 1, 0)
+data03d$CC91<-ifelse(data03d$CAMEO.Code=="91", 1, 0)
+data03d$CC92<-ifelse(data03d$CAMEO.Code=="92", 1, 0)
+data03d$CC94<-ifelse(data03d$CAMEO.Code=="94", 1, 0)
+data03d$CC100<-ifelse(data03d$CAMEO.Code=="100", 1, 0)
+data03d$CC101<-ifelse(data03d$CAMEO.Code=="101", 1, 0)
+data03d$CC102<-ifelse(data03d$CAMEO.Code=="102", 1, 0)
+data03d$CC103<-ifelse(data03d$CAMEO.Code=="103", 1, 0)
+data03d$CC104<-ifelse(data03d$CAMEO.Code=="104", 1, 0)
+data03d$CC106<-ifelse(data03d$CAMEO.Code=="106", 1, 0)
+data03d$CC108<-ifelse(data03d$CAMEO.Code=="108", 1, 0)
+data03d$CC111<-ifelse(data03d$CAMEO.Code=="111", 1, 0)
+data03d$CC112<-ifelse(data03d$CAMEO.Code=="112", 1, 0)
+data03d$CC113<-ifelse(data03d$CAMEO.Code=="113", 1, 0)
+data03d$CC114<-ifelse(data03d$CAMEO.Code=="114", 1, 0)
+data03d$CC124<-ifelse(data03d$CAMEO.Code=="124", 1, 0)
+data03d$CC130<-ifelse(data03d$CAMEO.Code=="130", 1, 0)
+data03d$CC131<-ifelse(data03d$CAMEO.Code=="131", 1, 0)
+data03d$CC133<-ifelse(data03d$CAMEO.Code=="133", 1, 0)
+data03d$CC138<-ifelse(data03d$CAMEO.Code=="138", 1, 0)
+data03d$CC139<-ifelse(data03d$CAMEO.Code=="139", 1, 0)
+data03d$CC163<-ifelse(data03d$CAMEO.Code=="163", 1, 0)
+data03d$CC213<-ifelse(data03d$CAMEO.Code=="213", 1, 0)
+data03d$CC214<-ifelse(data03d$CAMEO.Code=="214", 1, 0)
+data03d$CC241<-ifelse(data03d$CAMEO.Code=="241", 1, 0)
+data03d$CC242<-ifelse(data03d$CAMEO.Code=="242", 1, 0)
+data03d$CC243<-ifelse(data03d$CAMEO.Code=="243", 1, 0)
+data03d$CC244<-ifelse(data03d$CAMEO.Code=="244", 1, 0)
+data03d$CC253<-ifelse(data03d$CAMEO.Code=="253", 1, 0)
+data03d$CC255<-ifelse(data03d$CAMEO.Code=="255", 1, 0)
+data03d$CC256<-ifelse(data03d$CAMEO.Code=="256", 1, 0)
+data03d$CC1041<-ifelse(data03d$CAMEO.Code=="1041", 1, 0)
+data03d$CC1042<-ifelse(data03d$CAMEO.Code=="1042", 1, 0)
+data03d$CC1043<-ifelse(data03d$CAMEO.Code=="1043", 1, 0)
+data03d$CC1053<-ifelse(data03d$CAMEO.Code=="1053", 1, 0)
+data03d$CC1056<-ifelse(data03d$CAMEO.Code=="1056", 1, 0)
+data03d$CC1121<-ifelse(data03d$CAMEO.Code=="1121", 1, 0)
+data03d$CC1122<-ifelse(data03d$CAMEO.Code=="1122", 1, 0)
+data03d$CC1123<-ifelse(data03d$CAMEO.Code=="1123", 1, 0)
+data03d$CC1124<-ifelse(data03d$CAMEO.Code=="1124", 1, 0)
+data03d$CC1125<-ifelse(data03d$CAMEO.Code=="1125", 1, 0)
+data03d$CC1242<-ifelse(data03d$CAMEO.Code=="1242", 1, 0)
+data03d$CC93 <- ifelse(data03d$CAMEO.Code=="93", 1, 0)
+data03d$CC1014 <- ifelse(data03d$CAMEO.Code=="1014", 1, 0)
 
 
 
 data03e<-separate(data03d, "Event.Date", paste("Date", 1:3, sep="_"), sep="-", extra="drop")
 
-event.counts2003<-summaryBy(Appeal_Jud_Coop + Appeal_Change_Leadership + Appeal_Policy_Change + 
-                                   Appeal_Rights + Appeal_Change_Inst + Demand + Demand_Change_Leadership
-                           + Demand_Policy_Change + Demand_Rights + Demand_Change_Inst + Appeal_Release
-                           + Accuse_HR + Accuse + Criticize + Investigate_War_Crimes + Investigate_HR + Demand_Jud_Coop + Demand_Hum_Aid 
-                           + Demand_Release + Accuse_War_Crimes ~ Country + Date_1, 
+event.count2003<-summaryBy(CC10+ CC12 + CC20 + CC22 + CC23 + CC24 + CC25 
+                           + CC90 + CC91+ CC92+ CC93+ CC94 + CC100 + 
+                                   CC101 + CC102 + CC103 + CC104 + CC106 + 
+                                   CC108+ CC111 +CC112 + CC113 + CC114 + CC124 
+                           + CC130 + CC131 + CC133 + CC138 + CC139 + 
+                                   CC163 + CC213 + CC214 + CC241 + CC242 + 
+                                   CC243 + CC244 + CC253 + CC255 + CC256 + 
+                                   CC1014 + CC1041 + CC1042 + CC1043 + CC1053 + 
+                                   CC1056 + CC1121 + CC1122 + CC1123 + CC1124 + 
+                                   CC1125 + CC1242  ~ Country + Date_1, 
                            FUN=sum, data=data03e)
 
 
 
-write.csv(event.counts2003, "/Users/KimFruge/Desktop/Projects/JAHRO/event.counts2003.cvs")
+write.csv(event.count2003, "/Volumes/Lexar/event.counts2003.csv")
 ##2004
 
-Events04 <- read.csv2("/Users/KimFruge/Desktop/Projects/Events2004.tab",  sep="\t", header=TRUE)
+Events04 <- read.csv2("/Volumes/Lexar/Events2004.tab",  sep="\t", header=TRUE)
 
 data04a<-separate(Events04, "Target.Sectors", paste("Target.Sectors", 1:17, sep="_"), sep=",", extra="drop")
 
@@ -851,45 +1174,81 @@ data04c<-subset(data04b,
 )
 
 data04d<-data04c
-data04d$Appeal_Jud_Coop<-ifelse(data04d$CAMEO.Code=="213", 1, NA)
-data04d$Appeal_Change_Leadership<-ifelse(data04d$CAMEO.Code=="241", 1, NA)
-data04d$Appeal_Policy_Change<-ifelse(data04d$CAMEO.Code=="242", 1, NA)
-data04d$Appeal_Rights<-ifelse(data04d$CAMEO.Code=="243", 1, NA)
-data04d$Appeal_Change_Inst<-ifelse(data04d$CAMEO.Code=="244", 1, NA)
-data04d$Appeal_Release<-ifelse(data04d$CAMEO.Code=="253", 1, NA)
-data04d$Demand<-ifelse(data04d$CAMEO.Code=="100", 1, NA)
-data04d$Demand_Change_Leadership<-ifelse(data04d$CAMEO.Code=="1041", 1, NA) 
-data04d$Demand_Policy_Change<-ifelse(data04d$CAMEO.Code=="1042", 1, NA)
-data04d$Demand_Rights<-ifelse(data04d$CAMEO.Code=="1043", 1, NA)
-data04d$Demand_Change_Inst<-ifelse(data04d$CAMEO.Code=="1044", 1, NA)
-data04d$Accuse_HR<-ifelse(data04d$CAMEO.Code=="1122", 1, NA)
-data04d$Accuse<-ifelse(data04d$CAMEO.Code=="112", 1, NA)
-data04d$Criticize<-ifelse(data04d$CAMEO.Code=="111", 1, NA)
-data04d$Investigate_War_Crimes<-ifelse(data04d$CAMEO.Code=="94", 1, NA)
-data04d$Investigate_HR<-ifelse(data04d$CAMEO.Code=="92", 1, NA)
-data04d$Demand_Jud_Coop<-ifelse(data04d$CAMEO.Code=="1013", 1, NA)
-data04d$Demand_Hum_Aid<-ifelse(data04d$CAMEO.Code=="1033", 1, NA)
-data04d$Demand_Release<-ifelse(data04d$CAMEO.Code=="1053", 1, NA)
-data04d$Accuse_War_Crimes<-ifelse(data04d$CAMEO.Code=="1124", 1, NA)
+data04d$CC10<-ifelse(data04d$CAMEO.Code=="10", 1, 0)
+data04d$CC12<-ifelse(data04d$CAMEO.Code=="12", 1, 0)
+data04d$CC20<-ifelse(data04d$CAMEO.Code=="20", 1, 0)
+data04d$CC22<-ifelse(data04d$CAMEO.Code=="22", 1, 0)
+data04d$CC23<-ifelse(data04d$CAMEO.Code=="23", 1, 0)
+data04d$CC24<-ifelse(data04d$CAMEO.Code=="24", 1, 0)
+data04d$CC25<-ifelse(data04d$CAMEO.Code=="25", 1, 0)
+data04d$CC90<-ifelse(data04d$CAMEO.Code=="90", 1, 0)
+data04d$CC91<-ifelse(data04d$CAMEO.Code=="91", 1, 0)
+data04d$CC92<-ifelse(data04d$CAMEO.Code=="92", 1, 0)
+data04d$CC94<-ifelse(data04d$CAMEO.Code=="94", 1, 0)
+data04d$CC100<-ifelse(data04d$CAMEO.Code=="100", 1, 0)
+data04d$CC101<-ifelse(data04d$CAMEO.Code=="101", 1, 0)
+data04d$CC102<-ifelse(data04d$CAMEO.Code=="102", 1, 0)
+data04d$CC103<-ifelse(data04d$CAMEO.Code=="103", 1, 0)
+data04d$CC104<-ifelse(data04d$CAMEO.Code=="104", 1, 0)
+data04d$CC106<-ifelse(data04d$CAMEO.Code=="106", 1, 0)
+data04d$CC108<-ifelse(data04d$CAMEO.Code=="108", 1, 0)
+data04d$CC111<-ifelse(data04d$CAMEO.Code=="111", 1, 0)
+data04d$CC112<-ifelse(data04d$CAMEO.Code=="112", 1, 0)
+data04d$CC113<-ifelse(data04d$CAMEO.Code=="113", 1, 0)
+data04d$CC114<-ifelse(data04d$CAMEO.Code=="114", 1, 0)
+data04d$CC124<-ifelse(data04d$CAMEO.Code=="124", 1, 0)
+data04d$CC130<-ifelse(data04d$CAMEO.Code=="130", 1, 0)
+data04d$CC131<-ifelse(data04d$CAMEO.Code=="131", 1, 0)
+data04d$CC133<-ifelse(data04d$CAMEO.Code=="133", 1, 0)
+data04d$CC138<-ifelse(data04d$CAMEO.Code=="138", 1, 0)
+data04d$CC139<-ifelse(data04d$CAMEO.Code=="139", 1, 0)
+data04d$CC163<-ifelse(data04d$CAMEO.Code=="163", 1, 0)
+data04d$CC213<-ifelse(data04d$CAMEO.Code=="213", 1, 0)
+data04d$CC214<-ifelse(data04d$CAMEO.Code=="214", 1, 0)
+data04d$CC241<-ifelse(data04d$CAMEO.Code=="241", 1, 0)
+data04d$CC242<-ifelse(data04d$CAMEO.Code=="242", 1, 0)
+data04d$CC243<-ifelse(data04d$CAMEO.Code=="243", 1, 0)
+data04d$CC244<-ifelse(data04d$CAMEO.Code=="244", 1, 0)
+data04d$CC253<-ifelse(data04d$CAMEO.Code=="253", 1, 0)
+data04d$CC255<-ifelse(data04d$CAMEO.Code=="255", 1, 0)
+data04d$CC256<-ifelse(data04d$CAMEO.Code=="256", 1, 0)
+data04d$CC1041<-ifelse(data04d$CAMEO.Code=="1041", 1, 0)
+data04d$CC1042<-ifelse(data04d$CAMEO.Code=="1042", 1, 0)
+data04d$CC1043<-ifelse(data04d$CAMEO.Code=="1043", 1, 0)
+data04d$CC1053<-ifelse(data04d$CAMEO.Code=="1053", 1, 0)
+data04d$CC1056<-ifelse(data04d$CAMEO.Code=="1056", 1, 0)
+data04d$CC1121<-ifelse(data04d$CAMEO.Code=="1121", 1, 0)
+data04d$CC1122<-ifelse(data04d$CAMEO.Code=="1122", 1, 0)
+data04d$CC1123<-ifelse(data04d$CAMEO.Code=="1123", 1, 0)
+data04d$CC1124<-ifelse(data04d$CAMEO.Code=="1124", 1, 0)
+data04d$CC1125<-ifelse(data04d$CAMEO.Code=="1125", 1, 0)
+data04d$CC1242<-ifelse(data04d$CAMEO.Code=="1242", 1, 0)
+data04d$CC93 <- ifelse(data04d$CAMEO.Code=="93", 1, 0)
+data04d$CC1014 <- ifelse(data04d$CAMEO.Code=="1014", 1, 0)
 
 
 
 data04e<-separate(data04d, "Event.Date", paste("Date", 1:3, sep="_"), sep="-", extra="drop")
 
-event.counts2004<-summaryBy(Appeal_Jud_Coop + Appeal_Change_Leadership + Appeal_Policy_Change + 
-                                   Appeal_Rights + Appeal_Change_Inst + Demand + Demand_Change_Leadership
-                           + Demand_Policy_Change + Demand_Rights + Demand_Change_Inst + Appeal_Release
-                           + Accuse_HR + Accuse + Criticize + Investigate_War_Crimes + Investigate_HR + Demand_Jud_Coop + Demand_Hum_Aid 
-                           + Demand_Release + Accuse_War_Crimes ~ Country + Date_1, 
+event.count2004<-summaryBy(CC10+ CC12 + CC20 + CC22 + CC23 + CC24 + CC25 
+                           + CC90 + CC91+ CC92+ CC93+ CC94 + CC100 + 
+                                   CC101 + CC102 + CC103 + CC104 + CC106 + 
+                                   CC108+ CC111 +CC112 + CC113 + CC114 + CC124 
+                           + CC130 + CC131 + CC133 + CC138 + CC139 + 
+                                   CC163 + CC213 + CC214 + CC241 + CC242 + 
+                                   CC243 + CC244 + CC253 + CC255 + CC256 + 
+                                   CC1014 + CC1041 + CC1042 + CC1043 + CC1053 + 
+                                   CC1056 + CC1121 + CC1122 + CC1123 + CC1124 + 
+                                   CC1125 + CC1242  ~ Country + Date_1, 
                            FUN=sum, data=data04e)
 
 
 
-write.csv(event.counts2004, "/Users/KimFruge/Desktop/Projects/JAHRO/event.counts2004.cvs")
+write.csv(event.count2004, "/Volumes/Lexar/event.counts2004.csv")
 
 ##2005
 
-Events05 <- read.csv2("/Users/KimFruge/Desktop/Projects/Events2005.tab",  sep="\t", header=TRUE)
+Events05 <- read.csv2("/Volumes/Lexar/Events2005.tab",  sep="\t", header=TRUE)
 
 data05a<-separate(Events05, "Target.Sectors", paste("Target.Sectors", 1:17, sep="_"), sep=",", extra="drop")
 
@@ -938,45 +1297,81 @@ data05c<-subset(data05b,
 )
 
 data05d<-data05c
-data05d$Appeal_Jud_Coop<-ifelse(data05d$CAMEO.Code=="213", 1, NA)
-data05d$Appeal_Change_Leadership<-ifelse(data05d$CAMEO.Code=="241", 1, NA)
-data05d$Appeal_Policy_Change<-ifelse(data05d$CAMEO.Code=="242", 1, NA)
-data05d$Appeal_Rights<-ifelse(data05d$CAMEO.Code=="243", 1, NA)
-data05d$Appeal_Change_Inst<-ifelse(data05d$CAMEO.Code=="244", 1, NA)
-data05d$Appeal_Release<-ifelse(data05d$CAMEO.Code=="253", 1, NA)
-data05d$Demand<-ifelse(data05d$CAMEO.Code=="100", 1, NA)
-data05d$Demand_Change_Leadership<-ifelse(data05d$CAMEO.Code=="1041", 1, NA) 
-data05d$Demand_Policy_Change<-ifelse(data05d$CAMEO.Code=="1042", 1, NA)
-data05d$Demand_Rights<-ifelse(data05d$CAMEO.Code=="1043", 1, NA)
-data05d$Demand_Change_Inst<-ifelse(data05d$CAMEO.Code=="1044", 1, NA)
-data05d$Accuse_HR<-ifelse(data05d$CAMEO.Code=="1122", 1, NA)
-data05d$Accuse<-ifelse(data05d$CAMEO.Code=="112", 1, NA)
-data05d$Criticize<-ifelse(data05d$CAMEO.Code=="111", 1, NA)
-data05d$Investigate_War_Crimes<-ifelse(data05d$CAMEO.Code=="94", 1, NA)
-data05d$Investigate_HR<-ifelse(data05d$CAMEO.Code=="92", 1, NA)
-data05d$Demand_Jud_Coop<-ifelse(data05d$CAMEO.Code=="1013", 1, NA)
-data05d$Demand_Hum_Aid<-ifelse(data05d$CAMEO.Code=="1033", 1, NA)
-data05d$Demand_Release<-ifelse(data05d$CAMEO.Code=="1053", 1, NA)
-data05d$Accuse_War_Crimes<-ifelse(data05d$CAMEO.Code=="1124", 1, NA)
+data05d$CC10<-ifelse(data05d$CAMEO.Code=="10", 1, 0)
+data05d$CC12<-ifelse(data05d$CAMEO.Code=="12", 1, 0)
+data05d$CC20<-ifelse(data05d$CAMEO.Code=="20", 1, 0)
+data05d$CC22<-ifelse(data05d$CAMEO.Code=="22", 1, 0)
+data05d$CC23<-ifelse(data05d$CAMEO.Code=="23", 1, 0)
+data05d$CC24<-ifelse(data05d$CAMEO.Code=="24", 1, 0)
+data05d$CC25<-ifelse(data05d$CAMEO.Code=="25", 1, 0)
+data05d$CC90<-ifelse(data05d$CAMEO.Code=="90", 1, 0)
+data05d$CC91<-ifelse(data05d$CAMEO.Code=="91", 1, 0)
+data05d$CC92<-ifelse(data05d$CAMEO.Code=="92", 1, 0)
+data05d$CC94<-ifelse(data05d$CAMEO.Code=="94", 1, 0)
+data05d$CC100<-ifelse(data05d$CAMEO.Code=="100", 1, 0)
+data05d$CC101<-ifelse(data05d$CAMEO.Code=="101", 1, 0)
+data05d$CC102<-ifelse(data05d$CAMEO.Code=="102", 1, 0)
+data05d$CC103<-ifelse(data05d$CAMEO.Code=="103", 1, 0)
+data05d$CC104<-ifelse(data05d$CAMEO.Code=="104", 1, 0)
+data05d$CC106<-ifelse(data05d$CAMEO.Code=="106", 1, 0)
+data05d$CC108<-ifelse(data05d$CAMEO.Code=="108", 1, 0)
+data05d$CC111<-ifelse(data05d$CAMEO.Code=="111", 1, 0)
+data05d$CC112<-ifelse(data05d$CAMEO.Code=="112", 1, 0)
+data05d$CC113<-ifelse(data05d$CAMEO.Code=="113", 1, 0)
+data05d$CC114<-ifelse(data05d$CAMEO.Code=="114", 1, 0)
+data05d$CC124<-ifelse(data05d$CAMEO.Code=="124", 1, 0)
+data05d$CC130<-ifelse(data05d$CAMEO.Code=="130", 1, 0)
+data05d$CC131<-ifelse(data05d$CAMEO.Code=="131", 1, 0)
+data05d$CC133<-ifelse(data05d$CAMEO.Code=="133", 1, 0)
+data05d$CC138<-ifelse(data05d$CAMEO.Code=="138", 1, 0)
+data05d$CC139<-ifelse(data05d$CAMEO.Code=="139", 1, 0)
+data05d$CC163<-ifelse(data05d$CAMEO.Code=="163", 1, 0)
+data05d$CC213<-ifelse(data05d$CAMEO.Code=="213", 1, 0)
+data05d$CC214<-ifelse(data05d$CAMEO.Code=="214", 1, 0)
+data05d$CC241<-ifelse(data05d$CAMEO.Code=="241", 1, 0)
+data05d$CC242<-ifelse(data05d$CAMEO.Code=="242", 1, 0)
+data05d$CC243<-ifelse(data05d$CAMEO.Code=="243", 1, 0)
+data05d$CC244<-ifelse(data05d$CAMEO.Code=="244", 1, 0)
+data05d$CC253<-ifelse(data05d$CAMEO.Code=="253", 1, 0)
+data05d$CC255<-ifelse(data05d$CAMEO.Code=="255", 1, 0)
+data05d$CC256<-ifelse(data05d$CAMEO.Code=="256", 1, 0)
+data05d$CC1041<-ifelse(data05d$CAMEO.Code=="1041", 1, 0)
+data05d$CC1042<-ifelse(data05d$CAMEO.Code=="1042", 1, 0)
+data05d$CC1043<-ifelse(data05d$CAMEO.Code=="1043", 1, 0)
+data05d$CC1053<-ifelse(data05d$CAMEO.Code=="1053", 1, 0)
+data05d$CC1056<-ifelse(data05d$CAMEO.Code=="1056", 1, 0)
+data05d$CC1121<-ifelse(data05d$CAMEO.Code=="1121", 1, 0)
+data05d$CC1122<-ifelse(data05d$CAMEO.Code=="1122", 1, 0)
+data05d$CC1123<-ifelse(data05d$CAMEO.Code=="1123", 1, 0)
+data05d$CC1124<-ifelse(data05d$CAMEO.Code=="1124", 1, 0)
+data05d$CC1125<-ifelse(data05d$CAMEO.Code=="1125", 1, 0)
+data05d$CC1242<-ifelse(data05d$CAMEO.Code=="1242", 1, 0)
+data05d$CC93 <- ifelse(data05d$CAMEO.Code=="93", 1, 0)
+data05d$CC1014 <- ifelse(data05d$CAMEO.Code=="1014", 1, 0)
 
 
 
 data05e<-separate(data05d, "Event.Date", paste("Date", 1:3, sep="_"), sep="-", extra="drop")
 
-event.counts2005<-summaryBy(Appeal_Jud_Coop + Appeal_Change_Leadership + Appeal_Policy_Change + 
-                                   Appeal_Rights + Appeal_Change_Inst + Demand + Demand_Change_Leadership
-                           + Demand_Policy_Change + Demand_Rights + Demand_Change_Inst + Appeal_Release
-                           + Accuse_HR + Accuse + Criticize + Investigate_War_Crimes + Investigate_HR + Demand_Jud_Coop + Demand_Hum_Aid 
-                           + Demand_Release + Accuse_War_Crimes ~ Country + Date_1, 
+event.count2005<-summaryBy(CC10+ CC12 + CC20 + CC22 + CC23 + CC24 + CC25 
+                           + CC90 + CC91+ CC92+ CC93+ CC94 + CC100 + 
+                                   CC101 + CC102 + CC103 + CC104 + CC106 + 
+                                   CC108+ CC111 +CC112 + CC113 + CC114 + CC124 
+                           + CC130 + CC131 + CC133 + CC138 + CC139 + 
+                                   CC163 + CC213 + CC214 + CC241 + CC242 + 
+                                   CC243 + CC244 + CC253 + CC255 + CC256 + 
+                                   CC1014 + CC1041 + CC1042 + CC1043 + CC1053 + 
+                                   CC1056 + CC1121 + CC1122 + CC1123 + CC1124 + 
+                                   CC1125 + CC1242  ~ Country + Date_1, 
                            FUN=sum, data=data05e)
 
 
 
-write.csv(event.counts2005, "/Users/KimFruge/Desktop/Projects/JAHRO/event.counts2005.cvs")
+write.csv(event.count2005, "/Volumes/Lexar/event.counts2005.csv")
 
 ##2006
 
-Events2006 <- read.csv2("/Users/KimFruge/Desktop/Projects/Events2006.tab",  sep="\t", header=TRUE)
+Events2006 <- read.csv2("/Volumes/Lexar/Events2006.tab",  sep="\t", header=TRUE)
 
 data06a<-separate(Events2006, "Target.Sectors", paste("Target.Sectors", 1:17, sep="_"), sep=",", extra="drop")
 
@@ -1025,45 +1420,80 @@ data06c<-subset(data06b,
 )
 
 data06d<-data06c
-data06d$Appeal_Jud_Coop<-ifelse(data06d$CAMEO.Code=="213", 1, NA)
-data06d$Appeal_Change_Leadership<-ifelse(data06d$CAMEO.Code=="241", 1, NA)
-data06d$Appeal_Policy_Change<-ifelse(data06d$CAMEO.Code=="242", 1, NA)
-data06d$Appeal_Rights<-ifelse(data06d$CAMEO.Code=="243", 1, NA)
-data06d$Appeal_Change_Inst<-ifelse(data06d$CAMEO.Code=="244", 1, NA)
-data06d$Appeal_Release<-ifelse(data06d$CAMEO.Code=="253", 1, NA)
-data06d$Demand<-ifelse(data06d$CAMEO.Code=="100", 1, NA)
-data06d$Demand_Change_Leadership<-ifelse(data06d$CAMEO.Code=="1041", 1, NA) 
-data06d$Demand_Policy_Change<-ifelse(data06d$CAMEO.Code=="1042", 1, NA)
-data06d$Demand_Rights<-ifelse(data06d$CAMEO.Code=="1043", 1, NA)
-data06d$Demand_Change_Inst<-ifelse(data06d$CAMEO.Code=="1044", 1, NA)
-data06d$Accuse_HR<-ifelse(data06d$CAMEO.Code=="1122", 1, NA)
-data06d$Accuse<-ifelse(data06d$CAMEO.Code=="112", 1, NA)
-data06d$Criticize<-ifelse(data06d$CAMEO.Code=="111", 1, NA)
-data06d$Investigate_War_Crimes<-ifelse(data06d$CAMEO.Code=="94", 1, NA)
-data06d$Investigate_HR<-ifelse(data06d$CAMEO.Code=="92", 1, NA)
-data06d$Demand_Jud_Coop<-ifelse(data06d$CAMEO.Code=="1013", 1, NA)
-data06d$Demand_Hum_Aid<-ifelse(data06d$CAMEO.Code=="1033", 1, NA)
-data06d$Demand_Release<-ifelse(data06d$CAMEO.Code=="1053", 1, NA)
-data06d$Accuse_War_Crimes<-ifelse(data06d$CAMEO.Code=="1124", 1, NA)
-
+data06d$CC10<-ifelse(data06d$CAMEO.Code=="10", 1, 0)
+data06d$CC12<-ifelse(data06d$CAMEO.Code=="12", 1, 0)
+data06d$CC20<-ifelse(data06d$CAMEO.Code=="20", 1, 0)
+data06d$CC22<-ifelse(data06d$CAMEO.Code=="22", 1, 0)
+data06d$CC23<-ifelse(data06d$CAMEO.Code=="23", 1, 0)
+data06d$CC24<-ifelse(data06d$CAMEO.Code=="24", 1, 0)
+data06d$CC25<-ifelse(data06d$CAMEO.Code=="25", 1, 0)
+data06d$CC90<-ifelse(data06d$CAMEO.Code=="90", 1, 0)
+data06d$CC91<-ifelse(data06d$CAMEO.Code=="91", 1, 0)
+data06d$CC92<-ifelse(data06d$CAMEO.Code=="92", 1, 0)
+data06d$CC94<-ifelse(data06d$CAMEO.Code=="94", 1, 0)
+data06d$CC100<-ifelse(data06d$CAMEO.Code=="100", 1, 0)
+data06d$CC101<-ifelse(data06d$CAMEO.Code=="101", 1, 0)
+data06d$CC102<-ifelse(data06d$CAMEO.Code=="102", 1, 0)
+data06d$CC103<-ifelse(data06d$CAMEO.Code=="103", 1, 0)
+data06d$CC104<-ifelse(data06d$CAMEO.Code=="104", 1, 0)
+data06d$CC106<-ifelse(data06d$CAMEO.Code=="106", 1, 0)
+data06d$CC108<-ifelse(data06d$CAMEO.Code=="108", 1, 0)
+data06d$CC111<-ifelse(data06d$CAMEO.Code=="111", 1, 0)
+data06d$CC112<-ifelse(data06d$CAMEO.Code=="112", 1, 0)
+data06d$CC113<-ifelse(data06d$CAMEO.Code=="113", 1, 0)
+data06d$CC114<-ifelse(data06d$CAMEO.Code=="114", 1, 0)
+data06d$CC124<-ifelse(data06d$CAMEO.Code=="124", 1, 0)
+data06d$CC130<-ifelse(data06d$CAMEO.Code=="130", 1, 0)
+data06d$CC131<-ifelse(data06d$CAMEO.Code=="131", 1, 0)
+data06d$CC133<-ifelse(data06d$CAMEO.Code=="133", 1, 0)
+data06d$CC138<-ifelse(data06d$CAMEO.Code=="138", 1, 0)
+data06d$CC139<-ifelse(data06d$CAMEO.Code=="139", 1, 0)
+data06d$CC163<-ifelse(data06d$CAMEO.Code=="163", 1, 0)
+data06d$CC213<-ifelse(data06d$CAMEO.Code=="213", 1, 0)
+data06d$CC214<-ifelse(data06d$CAMEO.Code=="214", 1, 0)
+data06d$CC241<-ifelse(data06d$CAMEO.Code=="241", 1, 0)
+data06d$CC242<-ifelse(data06d$CAMEO.Code=="242", 1, 0)
+data06d$CC243<-ifelse(data06d$CAMEO.Code=="243", 1, 0)
+data06d$CC244<-ifelse(data06d$CAMEO.Code=="244", 1, 0)
+data06d$CC253<-ifelse(data06d$CAMEO.Code=="253", 1, 0)
+data06d$CC255<-ifelse(data06d$CAMEO.Code=="255", 1, 0)
+data06d$CC256<-ifelse(data06d$CAMEO.Code=="256", 1, 0)
+data06d$CC1041<-ifelse(data06d$CAMEO.Code=="1041", 1, 0)
+data06d$CC1042<-ifelse(data06d$CAMEO.Code=="1042", 1, 0)
+data06d$CC1043<-ifelse(data06d$CAMEO.Code=="1043", 1, 0)
+data06d$CC1053<-ifelse(data06d$CAMEO.Code=="1053", 1, 0)
+data06d$CC1056<-ifelse(data06d$CAMEO.Code=="1056", 1, 0)
+data06d$CC1121<-ifelse(data06d$CAMEO.Code=="1121", 1, 0)
+data06d$CC1122<-ifelse(data06d$CAMEO.Code=="1122", 1, 0)
+data06d$CC1123<-ifelse(data06d$CAMEO.Code=="1123", 1, 0)
+data06d$CC1124<-ifelse(data06d$CAMEO.Code=="1124", 1, 0)
+data06d$CC1125<-ifelse(data06d$CAMEO.Code=="1125", 1, 0)
+data06d$CC1242<-ifelse(data06d$CAMEO.Code=="1242", 1, 0)
+data06d$CC93 <- ifelse(data06d$CAMEO.Code=="93", 1, 0)
+data06d$CC1014 <- ifelse(data06d$CAMEO.Code=="1014", 1, 0)
 
 
 data06e<-separate(data06d, "Event.Date", paste("Date", 1:3, sep="_"), sep="-", extra="drop")
 
-event.counts2006<-summaryBy(Appeal_Jud_Coop + Appeal_Change_Leadership + Appeal_Policy_Change + 
-                                   Appeal_Rights + Appeal_Change_Inst + Demand + Demand_Change_Leadership
-                           + Demand_Policy_Change + Demand_Rights + Demand_Change_Inst + Appeal_Release
-                           + Accuse_HR + Accuse + Criticize + Investigate_War_Crimes + Investigate_HR + Demand_Jud_Coop + Demand_Hum_Aid 
-                           + Demand_Release + Accuse_War_Crimes ~ Country + Date_1, 
+event.count2006<-summaryBy(CC10+ CC12 + CC20 + CC22 + CC23 + CC24 + CC25 
+                           + CC90 + CC91+ CC92+ CC93+ CC94 + CC100 + 
+                                   CC101 + CC102 + CC103 + CC104 + CC106 + 
+                                   CC108+ CC111 +CC112 + CC113 + CC114 + CC124 
+                           + CC130 + CC131 + CC133 + CC138 + CC139 + 
+                                   CC163 + CC213 + CC214 + CC241 + CC242 + 
+                                   CC243 + CC244 + CC253 + CC255 + CC256 + 
+                                   CC1014 + CC1041 + CC1042 + CC1043 + CC1053 + 
+                                   CC1056 + CC1121 + CC1122 + CC1123 + CC1124 + 
+                                   CC1125 + CC1242  ~ Country + Date_1, 
                            FUN=sum, data=data06e)
 
 
 
-write.csv(event.counts2006, "/Users/KimFruge/Desktop/Projects/JAHRO/event.counts2006.cvs")
+write.csv(event.count2006, "/Volumes/Lexar/event.counts2006.csv")
 
 ##2007
 
-Events2007 <- read.csv2("/Users/KimFruge/Desktop/Projects/Events2007.tab",  sep="\t", header=TRUE)
+Events2007 <- read.csv2("/Volumes/Lexar/Events2007.tab",  sep="\t", header=TRUE)
 
 data07a<-separate(Events2007, "Target.Sectors", paste("Target.Sectors", 1:17, sep="_"), sep=",", extra="drop")
 
@@ -1112,45 +1542,81 @@ data07c<-subset(data07b,
 )
 
 data07d<-data07c
-data07d$Appeal_Jud_Coop<-ifelse(data07d$CAMEO.Code=="213", 1, NA)
-data07d$Appeal_Change_Leadership<-ifelse(data07d$CAMEO.Code=="241", 1, NA)
-data07d$Appeal_Policy_Change<-ifelse(data07d$CAMEO.Code=="242", 1, NA)
-data07d$Appeal_Rights<-ifelse(data07d$CAMEO.Code=="243", 1, NA)
-data07d$Appeal_Change_Inst<-ifelse(data07d$CAMEO.Code=="244", 1, NA)
-data07d$Appeal_Release<-ifelse(data07d$CAMEO.Code=="253", 1, NA)
-data07d$Demand<-ifelse(data07d$CAMEO.Code=="100", 1, NA)
-data07d$Demand_Change_Leadership<-ifelse(data07d$CAMEO.Code=="1041", 1, NA) 
-data07d$Demand_Policy_Change<-ifelse(data07d$CAMEO.Code=="1042", 1, NA)
-data07d$Demand_Rights<-ifelse(data07d$CAMEO.Code=="1043", 1, NA)
-data07d$Demand_Change_Inst<-ifelse(data07d$CAMEO.Code=="1044", 1, NA)
-data07d$Accuse_HR<-ifelse(data07d$CAMEO.Code=="1122", 1, NA)
-data07d$Accuse<-ifelse(data07d$CAMEO.Code=="112", 1, NA)
-data07d$Criticize<-ifelse(data07d$CAMEO.Code=="111", 1, NA)
-data07d$Investigate_War_Crimes<-ifelse(data07d$CAMEO.Code=="94", 1, NA)
-data07d$Investigate_HR<-ifelse(data07d$CAMEO.Code=="92", 1, NA)
-data07d$Demand_Jud_Coop<-ifelse(data07d$CAMEO.Code=="1013", 1, NA)
-data07d$Demand_Hum_Aid<-ifelse(data07d$CAMEO.Code=="1033", 1, NA)
-data07d$Demand_Release<-ifelse(data07d$CAMEO.Code=="1053", 1, NA)
-data07d$Accuse_War_Crimes<-ifelse(data07d$CAMEO.Code=="1124", 1, NA)
+data07d$CC10<-ifelse(data07d$CAMEO.Code=="10", 1, 0)
+data07d$CC12<-ifelse(data07d$CAMEO.Code=="12", 1, 0)
+data07d$CC20<-ifelse(data07d$CAMEO.Code=="20", 1, 0)
+data07d$CC22<-ifelse(data07d$CAMEO.Code=="22", 1, 0)
+data07d$CC23<-ifelse(data07d$CAMEO.Code=="23", 1, 0)
+data07d$CC24<-ifelse(data07d$CAMEO.Code=="24", 1, 0)
+data07d$CC25<-ifelse(data07d$CAMEO.Code=="25", 1, 0)
+data07d$CC90<-ifelse(data07d$CAMEO.Code=="90", 1, 0)
+data07d$CC91<-ifelse(data07d$CAMEO.Code=="91", 1, 0)
+data07d$CC92<-ifelse(data07d$CAMEO.Code=="92", 1, 0)
+data07d$CC94<-ifelse(data07d$CAMEO.Code=="94", 1, 0)
+data07d$CC100<-ifelse(data07d$CAMEO.Code=="100", 1, 0)
+data07d$CC101<-ifelse(data07d$CAMEO.Code=="101", 1, 0)
+data07d$CC102<-ifelse(data07d$CAMEO.Code=="102", 1, 0)
+data07d$CC103<-ifelse(data07d$CAMEO.Code=="103", 1, 0)
+data07d$CC104<-ifelse(data07d$CAMEO.Code=="104", 1, 0)
+data07d$CC106<-ifelse(data07d$CAMEO.Code=="106", 1, 0)
+data07d$CC108<-ifelse(data07d$CAMEO.Code=="108", 1, 0)
+data07d$CC111<-ifelse(data07d$CAMEO.Code=="111", 1, 0)
+data07d$CC112<-ifelse(data07d$CAMEO.Code=="112", 1, 0)
+data07d$CC113<-ifelse(data07d$CAMEO.Code=="113", 1, 0)
+data07d$CC114<-ifelse(data07d$CAMEO.Code=="114", 1, 0)
+data07d$CC124<-ifelse(data07d$CAMEO.Code=="124", 1, 0)
+data07d$CC130<-ifelse(data07d$CAMEO.Code=="130", 1, 0)
+data07d$CC131<-ifelse(data07d$CAMEO.Code=="131", 1, 0)
+data07d$CC133<-ifelse(data07d$CAMEO.Code=="133", 1, 0)
+data07d$CC138<-ifelse(data07d$CAMEO.Code=="138", 1, 0)
+data07d$CC139<-ifelse(data07d$CAMEO.Code=="139", 1, 0)
+data07d$CC163<-ifelse(data07d$CAMEO.Code=="163", 1, 0)
+data07d$CC213<-ifelse(data07d$CAMEO.Code=="213", 1, 0)
+data07d$CC214<-ifelse(data07d$CAMEO.Code=="214", 1, 0)
+data07d$CC241<-ifelse(data07d$CAMEO.Code=="241", 1, 0)
+data07d$CC242<-ifelse(data07d$CAMEO.Code=="242", 1, 0)
+data07d$CC243<-ifelse(data07d$CAMEO.Code=="243", 1, 0)
+data07d$CC244<-ifelse(data07d$CAMEO.Code=="244", 1, 0)
+data07d$CC253<-ifelse(data07d$CAMEO.Code=="253", 1, 0)
+data07d$CC255<-ifelse(data07d$CAMEO.Code=="255", 1, 0)
+data07d$CC256<-ifelse(data07d$CAMEO.Code=="256", 1, 0)
+data07d$CC1041<-ifelse(data07d$CAMEO.Code=="1041", 1, 0)
+data07d$CC1042<-ifelse(data07d$CAMEO.Code=="1042", 1, 0)
+data07d$CC1043<-ifelse(data07d$CAMEO.Code=="1043", 1, 0)
+data07d$CC1053<-ifelse(data07d$CAMEO.Code=="1053", 1, 0)
+data07d$CC1056<-ifelse(data07d$CAMEO.Code=="1056", 1, 0)
+data07d$CC1121<-ifelse(data07d$CAMEO.Code=="1121", 1, 0)
+data07d$CC1122<-ifelse(data07d$CAMEO.Code=="1122", 1, 0)
+data07d$CC1123<-ifelse(data07d$CAMEO.Code=="1123", 1, 0)
+data07d$CC1124<-ifelse(data07d$CAMEO.Code=="1124", 1, 0)
+data07d$CC1125<-ifelse(data07d$CAMEO.Code=="1125", 1, 0)
+data07d$CC1242<-ifelse(data07d$CAMEO.Code=="1242", 1, 0)
+data07d$CC93 <- ifelse(data07d$CAMEO.Code=="93", 1, 0)
+data07d$CC1014 <- ifelse(data07d$CAMEO.Code=="1014", 1, 0)
 
 
 
 data07e<-separate(data07d, "Event.Date", paste("Date", 1:3, sep="_"), sep="-", extra="drop")
 
-event.counts2007<-summaryBy(Appeal_Jud_Coop + Appeal_Change_Leadership + Appeal_Policy_Change + 
-                                   Appeal_Rights + Appeal_Change_Inst + Demand + Demand_Change_Leadership
-                           + Demand_Policy_Change + Demand_Rights + Demand_Change_Inst + Appeal_Release
-                           + Accuse_HR + Accuse + Criticize + Investigate_War_Crimes + Investigate_HR + Demand_Jud_Coop + Demand_Hum_Aid 
-                           + Demand_Release + Accuse_War_Crimes ~ Country + Date_1, 
+event.count2007<-summaryBy(CC10+ CC12 + CC20 + CC22 + CC23 + CC24 + CC25 
+                           + CC90 + CC91+ CC92+ CC93+ CC94 + CC100 + 
+                                   CC101 + CC102 + CC103 + CC104 + CC106 + 
+                                   CC108+ CC111 +CC112 + CC113 + CC114 + CC124 
+                           + CC130 + CC131 + CC133 + CC138 + CC139 + 
+                                   CC163 + CC213 + CC214 + CC241 + CC242 + 
+                                   CC243 + CC244 + CC253 + CC255 + CC256 + 
+                                   CC1014 + CC1041 + CC1042 + CC1043 + CC1053 + 
+                                   CC1056 + CC1121 + CC1122 + CC1123 + CC1124 + 
+                                   CC1125 + CC1242  ~ Country + Date_1, 
                            FUN=sum, data=data07e)
 
 
 
-write.csv(event.counts2007, "/Users/KimFruge/Desktop/Projects/JAHRO/event.counts2007.cvs")
+write.csv(event.count2007, "/Volumes/Lexar/event.counts2007.csv")
 
 ##2008
 
-Events08 <- read.csv2("/Users/KimFruge/Desktop/Projects/Events2008.tab",  sep="\t", header=TRUE)
+Events08 <- read.csv2("/Volumes/Lexar/Events2008.tab",  sep="\t", header=TRUE)
 
 data08a<-separate(Events08, "Target.Sectors", paste("Target.Sectors", 1:17, sep="_"), sep=",", extra="drop")
 
@@ -1199,45 +1665,81 @@ data08c<-subset(data08b,
 )
 
 data08d<-data08c
-data08d$Appeal_Jud_Coop<-ifelse(data08d$CAMEO.Code=="213", 1, NA)
-data08d$Appeal_Change_Leadership<-ifelse(data08d$CAMEO.Code=="241", 1, NA)
-data08d$Appeal_Policy_Change<-ifelse(data08d$CAMEO.Code=="242", 1, NA)
-data08d$Appeal_Rights<-ifelse(data08d$CAMEO.Code=="243", 1, NA)
-data08d$Appeal_Change_Inst<-ifelse(data08d$CAMEO.Code=="244", 1, NA)
-data08d$Appeal_Release<-ifelse(data08d$CAMEO.Code=="253", 1, NA)
-data08d$Demand<-ifelse(data08d$CAMEO.Code=="100", 1, NA)
-data08d$Demand_Change_Leadership<-ifelse(data08d$CAMEO.Code=="1041", 1, NA) 
-data08d$Demand_Policy_Change<-ifelse(data08d$CAMEO.Code=="1042", 1, NA)
-data08d$Demand_Rights<-ifelse(data08d$CAMEO.Code=="1043", 1, NA)
-data08d$Demand_Change_Inst<-ifelse(data08d$CAMEO.Code=="1044", 1, NA)
-data08d$Accuse_HR<-ifelse(data08d$CAMEO.Code=="1122", 1, NA)
-data08d$Accuse<-ifelse(data08d$CAMEO.Code=="112", 1, NA)
-data08d$Criticize<-ifelse(data08d$CAMEO.Code=="111", 1, NA)
-data08d$Investigate_War_Crimes<-ifelse(data08d$CAMEO.Code=="94", 1, NA)
-data08d$Investigate_HR<-ifelse(data08d$CAMEO.Code=="92", 1, NA)
-data08d$Demand_Jud_Coop<-ifelse(data08d$CAMEO.Code=="1013", 1, NA)
-data08d$Demand_Hum_Aid<-ifelse(data08d$CAMEO.Code=="1033", 1, NA)
-data08d$Demand_Release<-ifelse(data08d$CAMEO.Code=="1053", 1, NA)
-data08d$Accuse_War_Crimes<-ifelse(data08d$CAMEO.Code=="1124", 1, NA)
+data08d$CC10<-ifelse(data08d$CAMEO.Code=="10", 1, 0)
+data08d$CC12<-ifelse(data08d$CAMEO.Code=="12", 1, 0)
+data08d$CC20<-ifelse(data08d$CAMEO.Code=="20", 1, 0)
+data08d$CC22<-ifelse(data08d$CAMEO.Code=="22", 1, 0)
+data08d$CC23<-ifelse(data08d$CAMEO.Code=="23", 1, 0)
+data08d$CC24<-ifelse(data08d$CAMEO.Code=="24", 1, 0)
+data08d$CC25<-ifelse(data08d$CAMEO.Code=="25", 1, 0)
+data08d$CC90<-ifelse(data08d$CAMEO.Code=="90", 1, 0)
+data08d$CC91<-ifelse(data08d$CAMEO.Code=="91", 1, 0)
+data08d$CC92<-ifelse(data08d$CAMEO.Code=="92", 1, 0)
+data08d$CC94<-ifelse(data08d$CAMEO.Code=="94", 1, 0)
+data08d$CC100<-ifelse(data08d$CAMEO.Code=="100", 1, 0)
+data08d$CC101<-ifelse(data08d$CAMEO.Code=="101", 1, 0)
+data08d$CC102<-ifelse(data08d$CAMEO.Code=="102", 1, 0)
+data08d$CC103<-ifelse(data08d$CAMEO.Code=="103", 1, 0)
+data08d$CC104<-ifelse(data08d$CAMEO.Code=="104", 1, 0)
+data08d$CC106<-ifelse(data08d$CAMEO.Code=="106", 1, 0)
+data08d$CC108<-ifelse(data08d$CAMEO.Code=="108", 1, 0)
+data08d$CC111<-ifelse(data08d$CAMEO.Code=="111", 1, 0)
+data08d$CC112<-ifelse(data08d$CAMEO.Code=="112", 1, 0)
+data08d$CC113<-ifelse(data08d$CAMEO.Code=="113", 1, 0)
+data08d$CC114<-ifelse(data08d$CAMEO.Code=="114", 1, 0)
+data08d$CC124<-ifelse(data08d$CAMEO.Code=="124", 1, 0)
+data08d$CC130<-ifelse(data08d$CAMEO.Code=="130", 1, 0)
+data08d$CC131<-ifelse(data08d$CAMEO.Code=="131", 1, 0)
+data08d$CC133<-ifelse(data08d$CAMEO.Code=="133", 1, 0)
+data08d$CC138<-ifelse(data08d$CAMEO.Code=="138", 1, 0)
+data08d$CC139<-ifelse(data08d$CAMEO.Code=="139", 1, 0)
+data08d$CC163<-ifelse(data08d$CAMEO.Code=="163", 1, 0)
+data08d$CC213<-ifelse(data08d$CAMEO.Code=="213", 1, 0)
+data08d$CC214<-ifelse(data08d$CAMEO.Code=="214", 1, 0)
+data08d$CC241<-ifelse(data08d$CAMEO.Code=="241", 1, 0)
+data08d$CC242<-ifelse(data08d$CAMEO.Code=="242", 1, 0)
+data08d$CC243<-ifelse(data08d$CAMEO.Code=="243", 1, 0)
+data08d$CC244<-ifelse(data08d$CAMEO.Code=="244", 1, 0)
+data08d$CC253<-ifelse(data08d$CAMEO.Code=="253", 1, 0)
+data08d$CC255<-ifelse(data08d$CAMEO.Code=="255", 1, 0)
+data08d$CC256<-ifelse(data08d$CAMEO.Code=="256", 1, 0)
+data08d$CC1041<-ifelse(data08d$CAMEO.Code=="1041", 1, 0)
+data08d$CC1042<-ifelse(data08d$CAMEO.Code=="1042", 1, 0)
+data08d$CC1043<-ifelse(data08d$CAMEO.Code=="1043", 1, 0)
+data08d$CC1053<-ifelse(data08d$CAMEO.Code=="1053", 1, 0)
+data08d$CC1056<-ifelse(data08d$CAMEO.Code=="1056", 1, 0)
+data08d$CC1121<-ifelse(data08d$CAMEO.Code=="1121", 1, 0)
+data08d$CC1122<-ifelse(data08d$CAMEO.Code=="1122", 1, 0)
+data08d$CC1123<-ifelse(data08d$CAMEO.Code=="1123", 1, 0)
+data08d$CC1124<-ifelse(data08d$CAMEO.Code=="1124", 1, 0)
+data08d$CC1125<-ifelse(data08d$CAMEO.Code=="1125", 1, 0)
+data08d$CC1242<-ifelse(data08d$CAMEO.Code=="1242", 1, 0)
+data08d$CC93 <- ifelse(data08d$CAMEO.Code=="93", 1, 0)
+data08d$CC1014 <- ifelse(data08d$CAMEO.Code=="1014", 1, 0)
 
 
 
 data08e<-separate(data08d, "Event.Date", paste("Date", 1:3, sep="_"), sep="-", extra="drop")
 
-event.counts2008<-summaryBy(Appeal_Jud_Coop + Appeal_Change_Leadership + Appeal_Policy_Change + 
-                                   Appeal_Rights + Appeal_Change_Inst + Demand + Demand_Change_Leadership
-                           + Demand_Policy_Change + Demand_Rights + Demand_Change_Inst + Appeal_Release
-                           + Accuse_HR + Accuse + Criticize + Investigate_War_Crimes + Investigate_HR + Demand_Jud_Coop + Demand_Hum_Aid 
-                           + Demand_Release + Accuse_War_Crimes ~ Country + Date_1, 
+event.count2008<-summaryBy(CC10+ CC12 + CC20 + CC22 + CC23 + CC24 + CC25 
+                           + CC90 + CC91+ CC92+ CC93+ CC94 + CC100 + 
+                                   CC101 + CC102 + CC103 + CC104 + CC106 + 
+                                   CC108+ CC111 +CC112 + CC113 + CC114 + CC124 
+                           + CC130 + CC131 + CC133 + CC138 + CC139 + 
+                                   CC163 + CC213 + CC214 + CC241 + CC242 + 
+                                   CC243 + CC244 + CC253 + CC255 + CC256 + 
+                                   CC1014 + CC1041 + CC1042 + CC1043 + CC1053 + 
+                                   CC1056 + CC1121 + CC1122 + CC1123 + CC1124 + 
+                                   CC1125 + CC1242  ~ Country + Date_1, 
                            FUN=sum, data=data08e)
 
 
 
-write.csv(event.counts2008, "/Users/KimFruge/Desktop/Projects/JAHRO/event.counts2008.cvs")
+write.csv(event.count2008, "/Volumes/Lexar/event.counts2008.csv")
 
 ##2009
 
-Events09 <- read.csv2("/Users/KimFruge/Desktop/Projects/Events2009.tab",  sep="\t", header=TRUE)
+Events09 <- read.csv2("/Volumes/Lexar/Events2009.tab",  sep="\t", header=TRUE)
 
 data09a<-separate(Events09, "Target.Sectors", paste("Target.Sectors", 1:17, sep="_"), sep=",", extra="drop")
 
@@ -1286,45 +1788,81 @@ data09c<-subset(data09b,
 )
 
 data09d<-data09c
-data09d$Appeal_Jud_Coop<-ifelse(data09d$CAMEO.Code=="213", 1, NA)
-data09d$Appeal_Change_Leadership<-ifelse(data09d$CAMEO.Code=="241", 1, NA)
-data09d$Appeal_Policy_Change<-ifelse(data09d$CAMEO.Code=="242", 1, NA)
-data09d$Appeal_Rights<-ifelse(data09d$CAMEO.Code=="243", 1, NA)
-data09d$Appeal_Change_Inst<-ifelse(data09d$CAMEO.Code=="244", 1, NA)
-data09d$Appeal_Release<-ifelse(data09d$CAMEO.Code=="253", 1, NA)
-data09d$Demand<-ifelse(data09d$CAMEO.Code=="100", 1, NA)
-data09d$Demand_Change_Leadership<-ifelse(data09d$CAMEO.Code=="1041", 1, NA) 
-data09d$Demand_Policy_Change<-ifelse(data09d$CAMEO.Code=="1042", 1, NA)
-data09d$Demand_Rights<-ifelse(data09d$CAMEO.Code=="1043", 1, NA)
-data09d$Demand_Change_Inst<-ifelse(data09d$CAMEO.Code=="1044", 1, NA)
-data09d$Accuse_HR<-ifelse(data09d$CAMEO.Code=="1122", 1, NA)
-data09d$Accuse<-ifelse(data09d$CAMEO.Code=="112", 1, NA)
-data09d$Criticize<-ifelse(data09d$CAMEO.Code=="111", 1, NA)
-data09d$Investigate_War_Crimes<-ifelse(data09d$CAMEO.Code=="94", 1, NA)
-data09d$Investigate_HR<-ifelse(data09d$CAMEO.Code=="92", 1, NA)
-data09d$Demand_Jud_Coop<-ifelse(data09d$CAMEO.Code=="1013", 1, NA)
-data09d$Demand_Hum_Aid<-ifelse(data09d$CAMEO.Code=="1033", 1, NA)
-data09d$Demand_Release<-ifelse(data09d$CAMEO.Code=="1053", 1, NA)
-data09d$Accuse_War_Crimes<-ifelse(data09d$CAMEO.Code=="1124", 1, NA)
+data09d$CC10<-ifelse(data09d$CAMEO.Code=="10", 1, 0)
+data09d$CC12<-ifelse(data09d$CAMEO.Code=="12", 1, 0)
+data09d$CC20<-ifelse(data09d$CAMEO.Code=="20", 1, 0)
+data09d$CC22<-ifelse(data09d$CAMEO.Code=="22", 1, 0)
+data09d$CC23<-ifelse(data09d$CAMEO.Code=="23", 1, 0)
+data09d$CC24<-ifelse(data09d$CAMEO.Code=="24", 1, 0)
+data09d$CC25<-ifelse(data09d$CAMEO.Code=="25", 1, 0)
+data09d$CC90<-ifelse(data09d$CAMEO.Code=="90", 1, 0)
+data09d$CC91<-ifelse(data09d$CAMEO.Code=="91", 1, 0)
+data09d$CC92<-ifelse(data09d$CAMEO.Code=="92", 1, 0)
+data09d$CC94<-ifelse(data09d$CAMEO.Code=="94", 1, 0)
+data09d$CC100<-ifelse(data09d$CAMEO.Code=="100", 1, 0)
+data09d$CC101<-ifelse(data09d$CAMEO.Code=="101", 1, 0)
+data09d$CC102<-ifelse(data09d$CAMEO.Code=="102", 1, 0)
+data09d$CC103<-ifelse(data09d$CAMEO.Code=="103", 1, 0)
+data09d$CC104<-ifelse(data09d$CAMEO.Code=="104", 1, 0)
+data09d$CC106<-ifelse(data09d$CAMEO.Code=="106", 1, 0)
+data09d$CC108<-ifelse(data09d$CAMEO.Code=="108", 1, 0)
+data09d$CC111<-ifelse(data09d$CAMEO.Code=="111", 1, 0)
+data09d$CC112<-ifelse(data09d$CAMEO.Code=="112", 1, 0)
+data09d$CC113<-ifelse(data09d$CAMEO.Code=="113", 1, 0)
+data09d$CC114<-ifelse(data09d$CAMEO.Code=="114", 1, 0)
+data09d$CC124<-ifelse(data09d$CAMEO.Code=="124", 1, 0)
+data09d$CC130<-ifelse(data09d$CAMEO.Code=="130", 1, 0)
+data09d$CC131<-ifelse(data09d$CAMEO.Code=="131", 1, 0)
+data09d$CC133<-ifelse(data09d$CAMEO.Code=="133", 1, 0)
+data09d$CC138<-ifelse(data09d$CAMEO.Code=="138", 1, 0)
+data09d$CC139<-ifelse(data09d$CAMEO.Code=="139", 1, 0)
+data09d$CC163<-ifelse(data09d$CAMEO.Code=="163", 1, 0)
+data09d$CC213<-ifelse(data09d$CAMEO.Code=="213", 1, 0)
+data09d$CC214<-ifelse(data09d$CAMEO.Code=="214", 1, 0)
+data09d$CC241<-ifelse(data09d$CAMEO.Code=="241", 1, 0)
+data09d$CC242<-ifelse(data09d$CAMEO.Code=="242", 1, 0)
+data09d$CC243<-ifelse(data09d$CAMEO.Code=="243", 1, 0)
+data09d$CC244<-ifelse(data09d$CAMEO.Code=="244", 1, 0)
+data09d$CC253<-ifelse(data09d$CAMEO.Code=="253", 1, 0)
+data09d$CC255<-ifelse(data09d$CAMEO.Code=="255", 1, 0)
+data09d$CC256<-ifelse(data09d$CAMEO.Code=="256", 1, 0)
+data09d$CC1041<-ifelse(data09d$CAMEO.Code=="1041", 1, 0)
+data09d$CC1042<-ifelse(data09d$CAMEO.Code=="1042", 1, 0)
+data09d$CC1043<-ifelse(data09d$CAMEO.Code=="1043", 1, 0)
+data09d$CC1053<-ifelse(data09d$CAMEO.Code=="1053", 1, 0)
+data09d$CC1056<-ifelse(data09d$CAMEO.Code=="1056", 1, 0)
+data09d$CC1121<-ifelse(data09d$CAMEO.Code=="1121", 1, 0)
+data09d$CC1122<-ifelse(data09d$CAMEO.Code=="1122", 1, 0)
+data09d$CC1123<-ifelse(data09d$CAMEO.Code=="1123", 1, 0)
+data09d$CC1124<-ifelse(data09d$CAMEO.Code=="1124", 1, 0)
+data09d$CC1125<-ifelse(data09d$CAMEO.Code=="1125", 1, 0)
+data09d$CC1242<-ifelse(data09d$CAMEO.Code=="1242", 1, 0)
+data09d$CC93 <- ifelse(data09d$CAMEO.Code=="93", 1, 0)
+data09d$CC1014 <- ifelse(data09d$CAMEO.Code=="1014", 1, 0)
 
 
 
 data09e<-separate(data09d, "Event.Date", paste("Date", 1:3, sep="_"), sep="-", extra="drop")
 
-event.counts2009<-summaryBy(Appeal_Jud_Coop + Appeal_Change_Leadership + Appeal_Policy_Change + 
-                                   Appeal_Rights + Appeal_Change_Inst + Demand + Demand_Change_Leadership
-                           + Demand_Policy_Change + Demand_Rights + Demand_Change_Inst + Appeal_Release
-                           + Accuse_HR + Accuse + Criticize + Investigate_War_Crimes + Investigate_HR + Demand_Jud_Coop + Demand_Hum_Aid 
-                           + Demand_Release + Accuse_War_Crimes ~ Country + Date_1, 
+event.count2009<-summaryBy(CC10+ CC12 + CC20 + CC22 + CC23 + CC24 + CC25 
+                           + CC90 + CC91+ CC92+ CC93+ CC94 + CC100 + 
+                                   CC101 + CC102 + CC103 + CC104 + CC106 + 
+                                   CC108+ CC111 +CC112 + CC113 + CC114 + CC124 
+                           + CC130 + CC131 + CC133 + CC138 + CC139 + 
+                                   CC163 + CC213 + CC214 + CC241 + CC242 + 
+                                   CC243 + CC244 + CC253 + CC255 + CC256 + 
+                                   CC1014 + CC1041 + CC1042 + CC1043 + CC1053 + 
+                                   CC1056 + CC1121 + CC1122 + CC1123 + CC1124 + 
+                                   CC1125 + CC1242  ~ Country + Date_1, 
                            FUN=sum, data=data09e)
 
 
 
-write.csv(event.counts2009, "/Users/KimFruge/Desktop/Projects/JAHRO/event.counts2009.cvs")
+write.csv(event.count2009, "/Volumes/Lexar/event.counts2009.csv")
 
 ##2010
 
-Events10 <- read.csv2("/Users/KimFruge/Desktop/Projects/Events2010.tab",  sep="\t", header=TRUE)
+Events10 <- read.csv2("/Volumes/Lexar/Events2010.tab",  sep="\t", header=TRUE)
 
 data10a<-separate(Events10, "Target.Sectors", paste("Target.Sectors", 1:17, sep="_"), sep=",", extra="drop")
 
@@ -1373,45 +1911,81 @@ data10c<-subset(data10b,
 )
 
 data10d<-data10c
-data10d$Appeal_Jud_Coop<-ifelse(data10d$CAMEO.Code=="213", 1, NA)
-data10d$Appeal_Change_Leadership<-ifelse(data10d$CAMEO.Code=="241", 1, NA)
-data10d$Appeal_Policy_Change<-ifelse(data10d$CAMEO.Code=="242", 1, NA)
-data10d$Appeal_Rights<-ifelse(data10d$CAMEO.Code=="243", 1, NA)
-data10d$Appeal_Change_Inst<-ifelse(data10d$CAMEO.Code=="244", 1, NA)
-data10d$Appeal_Release<-ifelse(data10d$CAMEO.Code=="253", 1, NA)
-data10d$Demand<-ifelse(data10d$CAMEO.Code=="100", 1, NA)
-data10d$Demand_Change_Leadership<-ifelse(data10d$CAMEO.Code=="1041", 1, NA) 
-data10d$Demand_Policy_Change<-ifelse(data10d$CAMEO.Code=="1042", 1, NA)
-data10d$Demand_Rights<-ifelse(data10d$CAMEO.Code=="1043", 1, NA)
-data10d$Demand_Change_Inst<-ifelse(data10d$CAMEO.Code=="1044", 1, NA)
-data10d$Accuse_HR<-ifelse(data10d$CAMEO.Code=="1122", 1, NA)
-data10d$Accuse<-ifelse(data10d$CAMEO.Code=="112", 1, NA)
-data10d$Criticize<-ifelse(data10d$CAMEO.Code=="111", 1, NA)
-data10d$Investigate_War_Crimes<-ifelse(data10d$CAMEO.Code=="94", 1, NA)
-data10d$Investigate_HR<-ifelse(data10d$CAMEO.Code=="92", 1, NA)
-data10d$Demand_Jud_Coop<-ifelse(data10d$CAMEO.Code=="1013", 1, NA)
-data10d$Demand_Hum_Aid<-ifelse(data10d$CAMEO.Code=="1033", 1, NA)
-data10d$Demand_Release<-ifelse(data10d$CAMEO.Code=="1053", 1, NA)
-data10d$Accuse_War_Crimes<-ifelse(data10d$CAMEO.Code=="1124", 1, NA)
+data10d$CC10<-ifelse(data10d$CAMEO.Code=="10", 1, 0)
+data10d$CC12<-ifelse(data10d$CAMEO.Code=="12", 1, 0)
+data10d$CC20<-ifelse(data10d$CAMEO.Code=="20", 1, 0)
+data10d$CC22<-ifelse(data10d$CAMEO.Code=="22", 1, 0)
+data10d$CC23<-ifelse(data10d$CAMEO.Code=="23", 1, 0)
+data10d$CC24<-ifelse(data10d$CAMEO.Code=="24", 1, 0)
+data10d$CC25<-ifelse(data10d$CAMEO.Code=="25", 1, 0)
+data10d$CC90<-ifelse(data10d$CAMEO.Code=="90", 1, 0)
+data10d$CC91<-ifelse(data10d$CAMEO.Code=="91", 1, 0)
+data10d$CC92<-ifelse(data10d$CAMEO.Code=="92", 1, 0)
+data10d$CC94<-ifelse(data10d$CAMEO.Code=="94", 1, 0)
+data10d$CC100<-ifelse(data10d$CAMEO.Code=="100", 1, 0)
+data10d$CC101<-ifelse(data10d$CAMEO.Code=="101", 1, 0)
+data10d$CC102<-ifelse(data10d$CAMEO.Code=="102", 1, 0)
+data10d$CC103<-ifelse(data10d$CAMEO.Code=="103", 1, 0)
+data10d$CC104<-ifelse(data10d$CAMEO.Code=="104", 1, 0)
+data10d$CC106<-ifelse(data10d$CAMEO.Code=="106", 1, 0)
+data10d$CC108<-ifelse(data10d$CAMEO.Code=="108", 1, 0)
+data10d$CC111<-ifelse(data10d$CAMEO.Code=="111", 1, 0)
+data10d$CC112<-ifelse(data10d$CAMEO.Code=="112", 1, 0)
+data10d$CC113<-ifelse(data10d$CAMEO.Code=="113", 1, 0)
+data10d$CC114<-ifelse(data10d$CAMEO.Code=="114", 1, 0)
+data10d$CC124<-ifelse(data10d$CAMEO.Code=="124", 1, 0)
+data10d$CC130<-ifelse(data10d$CAMEO.Code=="130", 1, 0)
+data10d$CC131<-ifelse(data10d$CAMEO.Code=="131", 1, 0)
+data10d$CC133<-ifelse(data10d$CAMEO.Code=="133", 1, 0)
+data10d$CC138<-ifelse(data10d$CAMEO.Code=="138", 1, 0)
+data10d$CC139<-ifelse(data10d$CAMEO.Code=="139", 1, 0)
+data10d$CC163<-ifelse(data10d$CAMEO.Code=="163", 1, 0)
+data10d$CC213<-ifelse(data10d$CAMEO.Code=="213", 1, 0)
+data10d$CC214<-ifelse(data10d$CAMEO.Code=="214", 1, 0)
+data10d$CC241<-ifelse(data10d$CAMEO.Code=="241", 1, 0)
+data10d$CC242<-ifelse(data10d$CAMEO.Code=="242", 1, 0)
+data10d$CC243<-ifelse(data10d$CAMEO.Code=="243", 1, 0)
+data10d$CC244<-ifelse(data10d$CAMEO.Code=="244", 1, 0)
+data10d$CC253<-ifelse(data10d$CAMEO.Code=="253", 1, 0)
+data10d$CC255<-ifelse(data10d$CAMEO.Code=="255", 1, 0)
+data10d$CC256<-ifelse(data10d$CAMEO.Code=="256", 1, 0)
+data10d$CC1041<-ifelse(data10d$CAMEO.Code=="1041", 1, 0)
+data10d$CC1042<-ifelse(data10d$CAMEO.Code=="1042", 1, 0)
+data10d$CC1043<-ifelse(data10d$CAMEO.Code=="1043", 1, 0)
+data10d$CC1053<-ifelse(data10d$CAMEO.Code=="1053", 1, 0)
+data10d$CC1056<-ifelse(data10d$CAMEO.Code=="1056", 1, 0)
+data10d$CC1121<-ifelse(data10d$CAMEO.Code=="1121", 1, 0)
+data10d$CC1122<-ifelse(data10d$CAMEO.Code=="1122", 1, 0)
+data10d$CC1123<-ifelse(data10d$CAMEO.Code=="1123", 1, 0)
+data10d$CC1124<-ifelse(data10d$CAMEO.Code=="1124", 1, 0)
+data10d$CC1125<-ifelse(data10d$CAMEO.Code=="1125", 1, 0)
+data10d$CC1242<-ifelse(data10d$CAMEO.Code=="1242", 1, 0)
+data10d$CC93 <- ifelse(data10d$CAMEO.Code=="93", 1, 0)
+data10d$CC1014 <- ifelse(data10d$CAMEO.Code=="1014", 1, 0)
 
 
 
 data10e<-separate(data10d, "Event.Date", paste("Date", 1:3, sep="_"), sep="-", extra="drop")
 
-event.counts2010<-summaryBy(Appeal_Jud_Coop + Appeal_Change_Leadership + Appeal_Policy_Change + 
-                                   Appeal_Rights + Appeal_Change_Inst + Demand + Demand_Change_Leadership
-                           + Demand_Policy_Change + Demand_Rights + Demand_Change_Inst + Appeal_Release
-                           + Accuse_HR + Accuse + Criticize + Investigate_War_Crimes + Investigate_HR + Demand_Jud_Coop + Demand_Hum_Aid 
-                           + Demand_Release + Accuse_War_Crimes ~ Country + Date_1, 
+event.count2010<-summaryBy(CC10+ CC12 + CC20 + CC22 + CC23 + CC24 + CC25 
+                           + CC90 + CC91+ CC92+ CC93+ CC94 + CC100 + 
+                                   CC101 + CC102 + CC103 + CC104 + CC106 + 
+                                   CC108+ CC111 +CC112 + CC113 + CC114 + CC124 
+                           + CC130 + CC131 + CC133 + CC138 + CC139 + 
+                                   CC163 + CC213 + CC214 + CC241 + CC242 + 
+                                   CC243 + CC244 + CC253 + CC255 + CC256 + 
+                                   CC1014 + CC1041 + CC1042 + CC1043 + CC1053 + 
+                                   CC1056 + CC1121 + CC1122 + CC1123 + CC1124 + 
+                                   CC1125 + CC1242  ~ Country + Date_1, 
                            FUN=sum, data=data10e)
 
 
 
-write.csv(event.counts2010, "/Users/KimFruge/Desktop/Projects/JAHRO/event.counts2010.cvs")
+write.csv(event.count2010, "/Volumes/Lexar/event.counts2010.csv")
 
 #2011
 
-Events11 <- read.csv2("/Users/KimFruge/Desktop/Projects/Events2011.tab",  sep="\t", header=TRUE)
+Events11 <- read.csv2("/Volumes/Lexar/Events2011.tab",  sep="\t", header=TRUE)
 
 data11a<-separate(Events11, "Target.Sectors", paste("Target.Sectors", 1:17, sep="_"), sep=",", extra="drop")
 
@@ -1460,45 +2034,81 @@ data11c<-subset(data11b,
 )
 
 data11d<-data11c
-data11d$Appeal_Jud_Coop<-ifelse(data11d$CAMEO.Code=="213", 1, NA)
-data11d$Appeal_Change_Leadership<-ifelse(data11d$CAMEO.Code=="241", 1, NA)
-data11d$Appeal_Policy_Change<-ifelse(data11d$CAMEO.Code=="242", 1, NA)
-data11d$Appeal_Rights<-ifelse(data11d$CAMEO.Code=="243", 1, NA)
-data11d$Appeal_Change_Inst<-ifelse(data11d$CAMEO.Code=="244", 1, NA)
-data11d$Appeal_Release<-ifelse(data11d$CAMEO.Code=="253", 1, NA)
-data11d$Demand<-ifelse(data11d$CAMEO.Code=="100", 1, NA)
-data11d$Demand_Change_Leadership<-ifelse(data11d$CAMEO.Code=="1041", 1, NA) 
-data11d$Demand_Policy_Change<-ifelse(data11d$CAMEO.Code=="1042", 1, NA)
-data11d$Demand_Rights<-ifelse(data11d$CAMEO.Code=="1043", 1, NA)
-data11d$Demand_Change_Inst<-ifelse(data11d$CAMEO.Code=="1044", 1, NA)
-data11d$Accuse_HR<-ifelse(data11d$CAMEO.Code=="1122", 1, NA)
-data11d$Accuse<-ifelse(data11d$CAMEO.Code=="112", 1, NA)
-data11d$Criticize<-ifelse(data11d$CAMEO.Code=="111", 1, NA)
-data11d$Investigate_War_Crimes<-ifelse(data11d$CAMEO.Code=="94", 1, NA)
-data11d$Investigate_HR<-ifelse(data11d$CAMEO.Code=="92", 1, NA)
-data11d$Demand_Jud_Coop<-ifelse(data11d$CAMEO.Code=="1013", 1, NA)
-data11d$Demand_Hum_Aid<-ifelse(data11d$CAMEO.Code=="1033", 1, NA)
-data11d$Demand_Release<-ifelse(data11d$CAMEO.Code=="1053", 1, NA)
-data11d$Accuse_War_Crimes<-ifelse(data11d$CAMEO.Code=="1124", 1, NA)
+data11d$CC10<-ifelse(data11d$CAMEO.Code=="10", 1, 0)
+data11d$CC12<-ifelse(data11d$CAMEO.Code=="12", 1, 0)
+data11d$CC20<-ifelse(data11d$CAMEO.Code=="20", 1, 0)
+data11d$CC22<-ifelse(data11d$CAMEO.Code=="22", 1, 0)
+data11d$CC23<-ifelse(data11d$CAMEO.Code=="23", 1, 0)
+data11d$CC24<-ifelse(data11d$CAMEO.Code=="24", 1, 0)
+data11d$CC25<-ifelse(data11d$CAMEO.Code=="25", 1, 0)
+data11d$CC90<-ifelse(data11d$CAMEO.Code=="90", 1, 0)
+data11d$CC91<-ifelse(data11d$CAMEO.Code=="91", 1, 0)
+data11d$CC92<-ifelse(data11d$CAMEO.Code=="92", 1, 0)
+data11d$CC94<-ifelse(data11d$CAMEO.Code=="94", 1, 0)
+data11d$CC100<-ifelse(data11d$CAMEO.Code=="100", 1, 0)
+data11d$CC101<-ifelse(data11d$CAMEO.Code=="101", 1, 0)
+data11d$CC102<-ifelse(data11d$CAMEO.Code=="102", 1, 0)
+data11d$CC103<-ifelse(data11d$CAMEO.Code=="103", 1, 0)
+data11d$CC104<-ifelse(data11d$CAMEO.Code=="104", 1, 0)
+data11d$CC106<-ifelse(data11d$CAMEO.Code=="106", 1, 0)
+data11d$CC108<-ifelse(data11d$CAMEO.Code=="108", 1, 0)
+data11d$CC111<-ifelse(data11d$CAMEO.Code=="111", 1, 0)
+data11d$CC112<-ifelse(data11d$CAMEO.Code=="112", 1, 0)
+data11d$CC113<-ifelse(data11d$CAMEO.Code=="113", 1, 0)
+data11d$CC114<-ifelse(data11d$CAMEO.Code=="114", 1, 0)
+data11d$CC124<-ifelse(data11d$CAMEO.Code=="124", 1, 0)
+data11d$CC130<-ifelse(data11d$CAMEO.Code=="130", 1, 0)
+data11d$CC131<-ifelse(data11d$CAMEO.Code=="131", 1, 0)
+data11d$CC133<-ifelse(data11d$CAMEO.Code=="133", 1, 0)
+data11d$CC138<-ifelse(data11d$CAMEO.Code=="138", 1, 0)
+data11d$CC139<-ifelse(data11d$CAMEO.Code=="139", 1, 0)
+data11d$CC163<-ifelse(data11d$CAMEO.Code=="163", 1, 0)
+data11d$CC213<-ifelse(data11d$CAMEO.Code=="213", 1, 0)
+data11d$CC214<-ifelse(data11d$CAMEO.Code=="214", 1, 0)
+data11d$CC241<-ifelse(data11d$CAMEO.Code=="241", 1, 0)
+data11d$CC242<-ifelse(data11d$CAMEO.Code=="242", 1, 0)
+data11d$CC243<-ifelse(data11d$CAMEO.Code=="243", 1, 0)
+data11d$CC244<-ifelse(data11d$CAMEO.Code=="244", 1, 0)
+data11d$CC253<-ifelse(data11d$CAMEO.Code=="253", 1, 0)
+data11d$CC255<-ifelse(data11d$CAMEO.Code=="255", 1, 0)
+data11d$CC256<-ifelse(data11d$CAMEO.Code=="256", 1, 0)
+data11d$CC1041<-ifelse(data11d$CAMEO.Code=="1041", 1, 0)
+data11d$CC1042<-ifelse(data11d$CAMEO.Code=="1042", 1, 0)
+data11d$CC1043<-ifelse(data11d$CAMEO.Code=="1043", 1, 0)
+data11d$CC1053<-ifelse(data11d$CAMEO.Code=="1053", 1, 0)
+data11d$CC1056<-ifelse(data11d$CAMEO.Code=="1056", 1, 0)
+data11d$CC1121<-ifelse(data11d$CAMEO.Code=="1121", 1, 0)
+data11d$CC1122<-ifelse(data11d$CAMEO.Code=="1122", 1, 0)
+data11d$CC1123<-ifelse(data11d$CAMEO.Code=="1123", 1, 0)
+data11d$CC1124<-ifelse(data11d$CAMEO.Code=="1124", 1, 0)
+data11d$CC1125<-ifelse(data11d$CAMEO.Code=="1125", 1, 0)
+data11d$CC1242<-ifelse(data11d$CAMEO.Code=="1242", 1, 0)
+data11d$CC93 <- ifelse(data11d$CAMEO.Code=="93", 1, 0)
+data11d$CC1014 <- ifelse(data11d$CAMEO.Code=="1014", 1, 0)
 
 
 
 data11e<-separate(data11d, "Event.Date", paste("Date", 1:3, sep="_"), sep="-", extra="drop")
 
-event.counts2011<-summaryBy(Appeal_Jud_Coop + Appeal_Change_Leadership + Appeal_Policy_Change + 
-                                   Appeal_Rights + Appeal_Change_Inst + Demand + Demand_Change_Leadership
-                           + Demand_Policy_Change + Demand_Rights + Demand_Change_Inst + Appeal_Release
-                           + Accuse_HR + Accuse + Criticize + Investigate_War_Crimes + Investigate_HR + Demand_Jud_Coop + Demand_Hum_Aid 
-                           + Demand_Release + Accuse_War_Crimes ~ Country + Date_1, 
+event.count2011<-summaryBy(CC10+ CC12 + CC20 + CC22 + CC23 + CC24 + CC25 
+                           + CC90 + CC91+ CC92+ CC93+ CC94 + CC100 + 
+                                   CC101 + CC102 + CC103 + CC104 + CC106 + 
+                                   CC108+ CC111 +CC112 + CC113 + CC114 + CC124 
+                           + CC130 + CC131 + CC133 + CC138 + CC139 + 
+                                   CC163 + CC213 + CC214 + CC241 + CC242 + 
+                                   CC243 + CC244 + CC253 + CC255 + CC256 + 
+                                   CC1014 + CC1041 + CC1042 + CC1043 + CC1053 + 
+                                   CC1056 + CC1121 + CC1122 + CC1123 + CC1124 + 
+                                   CC1125 + CC1242  ~ Country + Date_1, 
                            FUN=sum, data=data11e)
 
 
 
-write.csv(event.counts2011, "/Users/KimFruge/Desktop/Projects/JAHRO/event.counts2011.cvs")
+write.csv(event.count2011, "/Volumes/Lexar/event.counts2011.csv")
 
 ##2012
 
-Events12 <- read.csv2("/Users/KimFruge/Desktop/Projects/Events2012.tab",  sep="\t", header=TRUE)
+Events12 <- read.csv2("/Volumes/Lexar/Events2012.tab",  sep="\t", header=TRUE)
 
 data12a<-separate(Events12, "Target.Sectors", paste("Target.Sectors", 1:17, sep="_"), sep=",", extra="drop")
 
@@ -1547,45 +2157,81 @@ data12c<-subset(data12b,
 )
 
 data12d<-data12c
-data12d$Appeal_Jud_Coop<-ifelse(data12d$CAMEO.Code=="213", 1, NA)
-data12d$Appeal_Change_Leadership<-ifelse(data12d$CAMEO.Code=="241", 1, NA)
-data12d$Appeal_Policy_Change<-ifelse(data12d$CAMEO.Code=="242", 1, NA)
-data12d$Appeal_Rights<-ifelse(data12d$CAMEO.Code=="243", 1, NA)
-data12d$Appeal_Change_Inst<-ifelse(data12d$CAMEO.Code=="244", 1, NA)
-data12d$Appeal_Release<-ifelse(data12d$CAMEO.Code=="253", 1, NA)
-data12d$Demand<-ifelse(data12d$CAMEO.Code=="100", 1, NA)
-data12d$Demand_Change_Leadership<-ifelse(data12d$CAMEO.Code=="1041", 1, NA) 
-data12d$Demand_Policy_Change<-ifelse(data12d$CAMEO.Code=="1042", 1, NA)
-data12d$Demand_Rights<-ifelse(data12d$CAMEO.Code=="1043", 1, NA)
-data12d$Demand_Change_Inst<-ifelse(data12d$CAMEO.Code=="1044", 1, NA)
-data12d$Accuse_HR<-ifelse(data12d$CAMEO.Code=="1122", 1, NA)
-data12d$Accuse<-ifelse(data12d$CAMEO.Code=="112", 1, NA)
-data12d$Criticize<-ifelse(data12d$CAMEO.Code=="111", 1, NA)
-data12d$Investigate_War_Crimes<-ifelse(data12d$CAMEO.Code=="94", 1, NA)
-data12d$Investigate_HR<-ifelse(data12d$CAMEO.Code=="92", 1, NA)
-data12d$Demand_Jud_Coop<-ifelse(data12d$CAMEO.Code=="1013", 1, NA)
-data12d$Demand_Hum_Aid<-ifelse(data12d$CAMEO.Code=="1033", 1, NA)
-data12d$Demand_Release<-ifelse(data12d$CAMEO.Code=="1053", 1, NA)
-data12d$Accuse_War_Crimes<-ifelse(data12d$CAMEO.Code=="1124", 1, NA)
+data12d$CC10<-ifelse(data12d$CAMEO.Code=="10", 1, 0)
+data12d$CC12<-ifelse(data12d$CAMEO.Code=="12", 1, 0)
+data12d$CC20<-ifelse(data12d$CAMEO.Code=="20", 1, 0)
+data12d$CC22<-ifelse(data12d$CAMEO.Code=="22", 1, 0)
+data12d$CC23<-ifelse(data12d$CAMEO.Code=="23", 1, 0)
+data12d$CC24<-ifelse(data12d$CAMEO.Code=="24", 1, 0)
+data12d$CC25<-ifelse(data12d$CAMEO.Code=="25", 1, 0)
+data12d$CC90<-ifelse(data12d$CAMEO.Code=="90", 1, 0)
+data12d$CC91<-ifelse(data12d$CAMEO.Code=="91", 1, 0)
+data12d$CC92<-ifelse(data12d$CAMEO.Code=="92", 1, 0)
+data12d$CC94<-ifelse(data12d$CAMEO.Code=="94", 1, 0)
+data12d$CC100<-ifelse(data12d$CAMEO.Code=="100", 1, 0)
+data12d$CC101<-ifelse(data12d$CAMEO.Code=="101", 1, 0)
+data12d$CC102<-ifelse(data12d$CAMEO.Code=="102", 1, 0)
+data12d$CC103<-ifelse(data12d$CAMEO.Code=="103", 1, 0)
+data12d$CC104<-ifelse(data12d$CAMEO.Code=="104", 1, 0)
+data12d$CC106<-ifelse(data12d$CAMEO.Code=="106", 1, 0)
+data12d$CC108<-ifelse(data12d$CAMEO.Code=="108", 1, 0)
+data12d$CC111<-ifelse(data12d$CAMEO.Code=="111", 1, 0)
+data12d$CC112<-ifelse(data12d$CAMEO.Code=="112", 1, 0)
+data12d$CC113<-ifelse(data12d$CAMEO.Code=="113", 1, 0)
+data12d$CC114<-ifelse(data12d$CAMEO.Code=="114", 1, 0)
+data12d$CC124<-ifelse(data12d$CAMEO.Code=="124", 1, 0)
+data12d$CC130<-ifelse(data12d$CAMEO.Code=="130", 1, 0)
+data12d$CC131<-ifelse(data12d$CAMEO.Code=="131", 1, 0)
+data12d$CC133<-ifelse(data12d$CAMEO.Code=="133", 1, 0)
+data12d$CC138<-ifelse(data12d$CAMEO.Code=="138", 1, 0)
+data12d$CC139<-ifelse(data12d$CAMEO.Code=="139", 1, 0)
+data12d$CC163<-ifelse(data12d$CAMEO.Code=="163", 1, 0)
+data12d$CC213<-ifelse(data12d$CAMEO.Code=="213", 1, 0)
+data12d$CC214<-ifelse(data12d$CAMEO.Code=="214", 1, 0)
+data12d$CC241<-ifelse(data12d$CAMEO.Code=="241", 1, 0)
+data12d$CC242<-ifelse(data12d$CAMEO.Code=="242", 1, 0)
+data12d$CC243<-ifelse(data12d$CAMEO.Code=="243", 1, 0)
+data12d$CC244<-ifelse(data12d$CAMEO.Code=="244", 1, 0)
+data12d$CC253<-ifelse(data12d$CAMEO.Code=="253", 1, 0)
+data12d$CC255<-ifelse(data12d$CAMEO.Code=="255", 1, 0)
+data12d$CC256<-ifelse(data12d$CAMEO.Code=="256", 1, 0)
+data12d$CC1041<-ifelse(data12d$CAMEO.Code=="1041", 1, 0)
+data12d$CC1042<-ifelse(data12d$CAMEO.Code=="1042", 1, 0)
+data12d$CC1043<-ifelse(data12d$CAMEO.Code=="1043", 1, 0)
+data12d$CC1053<-ifelse(data12d$CAMEO.Code=="1053", 1, 0)
+data12d$CC1056<-ifelse(data12d$CAMEO.Code=="1056", 1, 0)
+data12d$CC1121<-ifelse(data12d$CAMEO.Code=="1121", 1, 0)
+data12d$CC1122<-ifelse(data12d$CAMEO.Code=="1122", 1, 0)
+data12d$CC1123<-ifelse(data12d$CAMEO.Code=="1123", 1, 0)
+data12d$CC1124<-ifelse(data12d$CAMEO.Code=="1124", 1, 0)
+data12d$CC1125<-ifelse(data12d$CAMEO.Code=="1125", 1, 0)
+data12d$CC1242<-ifelse(data12d$CAMEO.Code=="1242", 1, 0)
+data12d$CC93 <- ifelse(data12d$CAMEO.Code=="93", 1, 0)
+data12d$CC1014 <- ifelse(data12d$CAMEO.Code=="1014", 1, 0)
 
 
 
 data12e<-separate(data12d, "Event.Date", paste("Date", 1:3, sep="_"), sep="-", extra="drop")
 
-event.counts2012<-summaryBy(Appeal_Jud_Coop + Appeal_Change_Leadership + Appeal_Policy_Change + 
-                                   Appeal_Rights + Appeal_Change_Inst + Demand + Demand_Change_Leadership
-                           + Demand_Policy_Change + Demand_Rights + Demand_Change_Inst + Appeal_Release
-                           + Accuse_HR + Accuse + Criticize + Investigate_War_Crimes + Investigate_HR + Demand_Jud_Coop + Demand_Hum_Aid 
-                           + Demand_Release + Accuse_War_Crimes ~ Country + Date_1, 
+event.count2012<-summaryBy(CC10+ CC12 + CC20 + CC22 + CC23 + CC24 + CC25 
+                           + CC90 + CC91+ CC92+ CC93+ CC94 + CC100 + 
+                                   CC101 + CC102 + CC103 + CC104 + CC106 + 
+                                   CC108+ CC111 +CC112 + CC113 + CC114 + CC124 
+                           + CC130 + CC131 + CC133 + CC138 + CC139 + 
+                                   CC163 + CC213 + CC214 + CC241 + CC242 + 
+                                   CC243 + CC244 + CC253 + CC255 + CC256 + 
+                                   CC1014 + CC1041 + CC1042 + CC1043 + CC1053 + 
+                                   CC1056 + CC1121 + CC1122 + CC1123 + CC1124 + 
+                                   CC1125 + CC1242 ~ Country + Date_1, 
                            FUN=sum, data=data12e)
 
 
 
-write.csv(event.counts2012, "/Users/KimFruge/Desktop/Projects/JAHRO/event.counts2012.cvs")
+write.csv(event.count2012, "/Volumes/Lexar/event.counts2012.csv")
 
 ##2013
 
-Events13 <- read.csv2("/Users/KimFruge/Desktop/Projects/Events2013.tab",  sep="\t", header=TRUE)
+Events13 <- read.csv2("/Volumes/Lexar/Events2013.tab",  sep="\t", header=TRUE)
 
 data13a<-separate(Events13, "Target.Sectors", paste("Target.Sectors", 1:17, sep="_"), sep=",", extra="drop")
 
@@ -1634,63 +2280,74 @@ data13c<-subset(data13b,
 )
 
 data13d<-data13c
-data13d$Appeal_Jud_Coop<-ifelse(data13d$CAMEO.Code=="213", 1, NA)
-data13d$Appeal_Change_Leadership<-ifelse(data13d$CAMEO.Code=="241", 1, NA)
-data13d$Appeal_Policy_Change<-ifelse(data13d$CAMEO.Code=="242", 1, NA)
-data13d$Appeal_Rights<-ifelse(data13d$CAMEO.Code=="243", 1, NA)
-data13d$Appeal_Change_Inst<-ifelse(data13d$CAMEO.Code=="244", 1, NA)
-data13d$Appeal_Release<-ifelse(data13d$CAMEO.Code=="253", 1, NA)
-data13d$Demand<-ifelse(data13d$CAMEO.Code=="100", 1, NA)
-data13d$Demand_Change_Leadership<-ifelse(data13d$CAMEO.Code=="1041", 1, NA) 
-data13d$Demand_Policy_Change<-ifelse(data13d$CAMEO.Code=="1042", 1, NA)
-data13d$Demand_Rights<-ifelse(data13d$CAMEO.Code=="1043", 1, NA)
-data13d$Demand_Change_Inst<-ifelse(data13d$CAMEO.Code=="1044", 1, NA)
-data13d$Accuse_HR<-ifelse(data13d$CAMEO.Code=="1122", 1, NA)
-data13d$Accuse<-ifelse(data13d$CAMEO.Code=="112", 1, NA)
-data13d$Criticize<-ifelse(data13d$CAMEO.Code=="111", 1, NA)
-data13d$Investigate_War_Crimes<-ifelse(data13d$CAMEO.Code=="94", 1, NA)
-data13d$Investigate_HR<-ifelse(data13d$CAMEO.Code=="92", 1, NA)
-data13d$Demand_Jud_Coop<-ifelse(data13d$CAMEO.Code=="1013", 1, NA)
-data13d$Demand_Hum_Aid<-ifelse(data13d$CAMEO.Code=="1033", 1, NA)
-data13d$Demand_Release<-ifelse(data13d$CAMEO.Code=="1053", 1, NA)
-data13d$Accuse_War_Crimes<-ifelse(data13d$CAMEO.Code=="1124", 1, NA)
+data13d$CC10<-ifelse(data13d$CAMEO.Code=="10", 1, 0)
+data13d$CC12<-ifelse(data13d$CAMEO.Code=="12", 1, 0)
+data13d$CC20<-ifelse(data13d$CAMEO.Code=="20", 1, 0)
+data13d$CC22<-ifelse(data13d$CAMEO.Code=="22", 1, 0)
+data13d$CC23<-ifelse(data13d$CAMEO.Code=="23", 1, 0)
+data13d$CC24<-ifelse(data13d$CAMEO.Code=="24", 1, 0)
+data13d$CC25<-ifelse(data13d$CAMEO.Code=="25", 1, 0)
+data13d$CC90<-ifelse(data13d$CAMEO.Code=="90", 1, 0)
+data13d$CC91<-ifelse(data13d$CAMEO.Code=="91", 1, 0)
+data13d$CC92<-ifelse(data13d$CAMEO.Code=="92", 1, 0)
+data13d$CC94<-ifelse(data13d$CAMEO.Code=="94", 1, 0)
+data13d$CC100<-ifelse(data13d$CAMEO.Code=="100", 1, 0)
+data13d$CC101<-ifelse(data13d$CAMEO.Code=="101", 1, 0)
+data13d$CC102<-ifelse(data13d$CAMEO.Code=="102", 1, 0)
+data13d$CC103<-ifelse(data13d$CAMEO.Code=="103", 1, 0)
+data13d$CC104<-ifelse(data13d$CAMEO.Code=="104", 1, 0)
+data13d$CC106<-ifelse(data13d$CAMEO.Code=="106", 1, 0)
+data13d$CC108<-ifelse(data13d$CAMEO.Code=="108", 1, 0)
+data13d$CC111<-ifelse(data13d$CAMEO.Code=="111", 1, 0)
+data13d$CC112<-ifelse(data13d$CAMEO.Code=="112", 1, 0)
+data13d$CC113<-ifelse(data13d$CAMEO.Code=="113", 1, 0)
+data13d$CC114<-ifelse(data13d$CAMEO.Code=="114", 1, 0)
+data13d$CC124<-ifelse(data13d$CAMEO.Code=="124", 1, 0)
+data13d$CC130<-ifelse(data13d$CAMEO.Code=="130", 1, 0)
+data13d$CC131<-ifelse(data13d$CAMEO.Code=="131", 1, 0)
+data13d$CC133<-ifelse(data13d$CAMEO.Code=="133", 1, 0)
+data13d$CC138<-ifelse(data13d$CAMEO.Code=="138", 1, 0)
+data13d$CC139<-ifelse(data13d$CAMEO.Code=="139", 1, 0)
+data13d$CC163<-ifelse(data13d$CAMEO.Code=="163", 1, 0)
+data13d$CC213<-ifelse(data13d$CAMEO.Code=="213", 1, 0)
+data13d$CC214<-ifelse(data13d$CAMEO.Code=="214", 1, 0)
+data13d$CC241<-ifelse(data13d$CAMEO.Code=="241", 1, 0)
+data13d$CC242<-ifelse(data13d$CAMEO.Code=="242", 1, 0)
+data13d$CC243<-ifelse(data13d$CAMEO.Code=="243", 1, 0)
+data13d$CC244<-ifelse(data13d$CAMEO.Code=="244", 1, 0)
+data13d$CC253<-ifelse(data13d$CAMEO.Code=="253", 1, 0)
+data13d$CC255<-ifelse(data13d$CAMEO.Code=="255", 1, 0)
+data13d$CC256<-ifelse(data13d$CAMEO.Code=="256", 1, 0)
+data13d$CC1041<-ifelse(data13d$CAMEO.Code=="1041", 1, 0)
+data13d$CC1042<-ifelse(data13d$CAMEO.Code=="1042", 1, 0)
+data13d$CC1043<-ifelse(data13d$CAMEO.Code=="1043", 1, 0)
+data13d$CC1053<-ifelse(data13d$CAMEO.Code=="1053", 1, 0)
+data13d$CC1056<-ifelse(data13d$CAMEO.Code=="1056", 1, 0)
+data13d$CC1121<-ifelse(data13d$CAMEO.Code=="1121", 1, 0)
+data13d$CC1122<-ifelse(data13d$CAMEO.Code=="1122", 1, 0)
+data13d$CC1123<-ifelse(data13d$CAMEO.Code=="1123", 1, 0)
+data13d$CC1124<-ifelse(data13d$CAMEO.Code=="1124", 1, 0)
+data13d$CC1125<-ifelse(data13d$CAMEO.Code=="1125", 1, 0)
+data13d$CC1242<-ifelse(data13d$CAMEO.Code=="1242", 1, 0)
+data13d$CC93 <- ifelse(data13d$CAMEO.Code=="93", 1, 0)
+data13d$CC1014 <- ifelse(data13d$CAMEO.Code=="1014", 1, 0)
 
 
 
 data13e<-separate(data13d, "Event.Date", paste("Date", 1:3, sep="_"), sep="-", extra="drop")
 
-event.counts2013<-summaryBy(Appeal_Jud_Coop + Appeal_Change_Leadership + Appeal_Policy_Change + 
-                                   Appeal_Rights + Appeal_Change_Inst + Demand + Demand_Change_Leadership
-                           + Demand_Policy_Change + Demand_Rights + Demand_Change_Inst + Appeal_Release
-                           + Accuse_HR + Accuse + Criticize + Investigate_War_Crimes + Investigate_HR + Demand_Jud_Coop + Demand_Hum_Aid 
-                           + Demand_Release + Accuse_War_Crimes ~ Country + Date_1, 
-                           FUN=sum, data=data13e)
+event.count2013<-summaryBy(CC10+ CC12 + CC20 + CC22 + CC23 + CC24 + CC25 
+                        + CC90 + CC91+ CC92+ CC93+ CC94 + CC100 + 
+                        CC101 + CC102 + CC103 + CC104 + CC106 + 
+                        CC108+ CC111 +CC112 + CC113 + CC114 + CC124 
+                        + CC130 + CC131 + CC133 + CC138 + CC139 + 
+                        CC163 + CC213 + CC214 + CC241 + CC242 + 
+                        CC243 + CC244 + CC253 + CC255 + CC256 + 
+                        CC1014 + CC1041 + CC1042 + CC1043 + CC1053 + 
+                        CC1056 + CC1121 + CC1122 + CC1123 + CC1124 + 
+                        CC1125 + CC1242  ~ Country + Date_1, 
+                        FUN=sum, data=data13e)
 
 
 
-write.csv(event.counts2013, "/Users/KimFruge/Desktop/Projects/JAHRO/event.counts2013.cvs")
-
-#_________________________
-
-
-HRO_data<-rbind(event.counts1995, event.counts1996, event.counts1997, event.counts1998, event.counts1999, event.counts2000, event.counts2001, event.counts2002, event.counts2003, event.counts2004, event.counts2005, event.counts2006, event.counts2007, event.counts2008, event.counts2009, event.counts2010, event.counts2011, event.counts2012, event.counts2013)
-
-HRO_data[is.na(HRO_data)] <- 0
-
-HRO_data$NS_Jud<-HRO_data$Appeal_Jud_Coop + HRO_data$Demand_Jud_Coop
-        
-HRO_data$NS <- (HRO_data$Appeal_Change_Leadership.sum + HRO_data$Appeal_Policy_Change.sum  
-               + HRO_data$Appeal_Rights.sum  + HRO_data$Appeal_Change_Inst.sum  
-               + HRO_data$Demand_Change_Leadership.sum  + HRO_data$Demand_Policy_Change.sum  
-               + HRO_data$Demand_Rights.sum  + HRO_data$Demand_Change_Inst.sum  
-               + HRO_data$Appeal_Release.sum  + HRO_data$Accuse_HR.sum 
-               + HRO_data$Criticize.sum  + HRO_data$Investigate_War_Crimes.sum 
-               + HRO_data$Investigate_HR.sum  + HRO_data$Demand_Hum_Aid.sum  
-               + HRO_data$Demand_Release.sum  + HRO_data$Accuse_War_Crimes.sum )
-
-
-write.csv(HRO_data, "/Users/KimFruge/Desktop/Projects/JAHRO/HRO_data.cvs")
-
-
-
-
+write.csv(event.count2013, "/Volumes/Lexar/event.counts2013.csv")
